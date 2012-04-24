@@ -41,13 +41,17 @@ public class DisjointSet {
     }
 
     /**
-     * @return if the given coord come from the same component,
+     * @return true if the given coord comes from the same component,
      *         or false otherwise
      */
     boolean sameComponent(int x1, int y1, int x2, int y2) {
         return find(x1, y1) == find(x2, y2);
     }
 
+    /**
+     * @return true if the given coord comes from the same component,
+     *         or false otherwise
+     */
     boolean sameComponent(Coord c1, Coord c2) {
         return sameComponent(c1.getX(), c1.getY(), c2.getX(), c2.getY());
     }
@@ -72,7 +76,7 @@ public class DisjointSet {
         public int getY() {
             return y;
         }
-
+        
         @Override
         public boolean equals(Object that) {
             if(this == that) return true;
@@ -80,19 +84,20 @@ public class DisjointSet {
             Coord thatCoord = (Coord)that;
             return this.x == thatCoord.x && this.y == thatCoord.y;
         }
-
-        //TODO: If we know the size of each dimension of the disjoint set,
-        //We can reduce hash collisions
-        @Override
-        public int hashCode() {
-            return x+y;
+        
+        private int linearizePosition() {
+            return x * parents.length + y;
         }
 
-        //TODO: we NEED to know the dimensions of the set to implement this
+        @Override
+        public int hashCode() {
+            return linearizePosition();
+        }
+
         @Override
         public int compareTo(Coord that) {
             if(this == that) return 0;
-            throw new RuntimeException("Not Implemented!");
+            return linearizePosition() - that.linearizePosition();
         }
     }
 }
