@@ -3,6 +3,7 @@ package structures;
 import java.io.Serializable;
 
 public class Tuple implements Serializable, Comparable<Tuple>{
+    private static final long serialVersionUID = -4348248931257442036L;
     private int p;
     private int q;
     private int g;
@@ -13,7 +14,7 @@ public class Tuple implements Serializable, Comparable<Tuple>{
     }
     
     public Tuple(int g, int p, int q) {
-        this(p,q);
+        this(p, q);
         this.g = g;
     }
     
