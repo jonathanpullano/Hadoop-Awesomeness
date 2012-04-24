@@ -39,7 +39,7 @@ public class DisjointSet {
      *         or false otherwise
      */
     public boolean isConnected(int x1, int y1, int x2, int y2) {
-        return find(x1, y1) == find(x2, y2);
+        return find(x1, y1).equals(find(x2, y2));
     }
     
     /**
