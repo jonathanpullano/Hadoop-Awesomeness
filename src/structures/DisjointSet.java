@@ -1,3 +1,4 @@
+package structures;
 /**
  * @author jonathan
  */
@@ -28,6 +29,22 @@ public class DisjointSet {
             parents[parent2.x][parent2.y] = parent1;
         }
     }
+    
+    /**
+     * @return true if the given coord comes from the same component,
+     *         or false otherwise
+     */
+    public boolean sameComponent(int x1, int y1, int x2, int y2) {
+        return find(x1, y1) == find(x2, y2);
+    }
+    
+    /**
+     * @return true if the given coord comes from the same component,
+     *         or false otherwise
+     */
+    public boolean sameComponent(Coord c1, Coord c2) {
+        return sameComponent(c1.x, c1.y, c2.x, c2.y);
+    }
 
     /**
      * Returns the parent that identifies this component
@@ -41,40 +58,16 @@ public class DisjointSet {
     }
 
     /**
-     * @return true if the given coord comes from the same component,
-     *         or false otherwise
-     */
-    boolean sameComponent(int x1, int y1, int x2, int y2) {
-        return find(x1, y1) == find(x2, y2);
-    }
-
-    /**
-     * @return true if the given coord comes from the same component,
-     *         or false otherwise
-     */
-    boolean sameComponent(Coord c1, Coord c2) {
-        return sameComponent(c1.getX(), c1.getY(), c2.getX(), c2.getY());
-    }
-
-    /**
      * Represents a Coordinate from this Disjoint set
      * @author jonathan
      */
-    private final class Coord implements Comparable<Coord> {
+    public final class Coord implements Comparable<Coord> {
         private int x;
         private int y;
 
         public Coord(int x, int y) {
             this.x = x;
             this.y = y;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
         }
         
         @Override
