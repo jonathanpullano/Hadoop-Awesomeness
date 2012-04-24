@@ -1,4 +1,7 @@
 package structures;
+
+import java.util.HashSet;
+
 /**
  * @author jonathan
  */
@@ -51,9 +54,14 @@ public class DisjointSet {
      */
     public Coord find(int x, int y) {
         Coord parent = new Coord(x,y);
+        HashSet<Coord> examined = new HashSet<Coord>();
+        examined.add(parent);
         while(!parents[x][y].equals(parent)) {
             parent = parents[x][y];
+            examined.add(parent);
         }
+        for(Coord c : examined) 
+            parents[c.x][c.y] = parent;
         return parent;
     }
 
