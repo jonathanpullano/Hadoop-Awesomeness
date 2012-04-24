@@ -14,6 +14,7 @@ public class DisjointSet {
      * @param ySize y dimension of this graph
      */
     public DisjointSet(int xSize, int ySize) {
+        if(xSize == 0 || ySize == 0) throw new IndexOutOfBoundsException("Invalid Set Size");
         parents = new Coord[xSize][ySize];
         for(int i = 0; i < xSize; i++)
             for(int j = 0; j < ySize; j++)
@@ -37,7 +38,7 @@ public class DisjointSet {
      * @return true if the given coord comes from the same component,
      *         or false otherwise
      */
-    public boolean sameComponent(int x1, int y1, int x2, int y2) {
+    public boolean isConnected(int x1, int y1, int x2, int y2) {
         return find(x1, y1) == find(x2, y2);
     }
     
@@ -45,8 +46,8 @@ public class DisjointSet {
      * @return true if the given coord comes from the same component,
      *         or false otherwise
      */
-    public boolean sameComponent(Coord c1, Coord c2) {
-        return sameComponent(c1.x, c1.y, c2.x, c2.y);
+    public boolean isConnected(Coord c1, Coord c2) {
+        return isConnected(c1.x, c1.y, c2.x, c2.y);
     }
 
     /**
