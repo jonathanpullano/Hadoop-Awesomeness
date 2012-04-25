@@ -8,14 +8,14 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+import constants.Constants;
+
 /**
  * 
  * @author chris d
  *
  */
 public class Map1 extends Mapper<LongWritable, Text, IntWritable, LongWritable> {
-	//private IntWritable p = new IntWritable();
-	//private IntWritable G = new IntWritable();
 	private Text word = new Text();
 
 	// compute filter parameters for netid ak883
@@ -23,10 +23,6 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, LongWritable> 
 	private static float desiredDensity = 0.59f;
 	private static float wMin = 0.4f * fromNetID;
 	private static float wLimit = wMin + desiredDensity; 
-	
-	//TODO: THESE SHOULD NOT BE HARD CODED!!
-	private static int M = 100; 									// Num of rows,cols
-	private static int G = 4;									// Num of column groups
 
 	@Override
 	public void map(LongWritable key, Text value, Context context)
@@ -70,10 +66,9 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, LongWritable> 
 				
 				// c. Once you know where it should be placed, calculate
 				//    its column_group (G) and its absolute position (p)
-				long div = M/G;
-				int c_g = (int)Math.min((col/div), G-1); 			// This is to correct rounding error in div, which makes last row(s) a new group
+				int c_g = (int)Math.min((col/Constants.groupLength), Constants.g-1); 			// This is to correct rounding error in div, which makes last row(s) a new group
 				IntWritable column_group = new IntWritable(c_g);
-				LongWritable position = new LongWritable((col*M)+(row+1));
+				LongWritable position = new LongWritable((col*Constants.M)+(row+1));
 				
 				// d. return (G,p)
 				context.write(column_group, position);
