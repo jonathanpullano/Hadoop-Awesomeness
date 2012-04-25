@@ -1,24 +1,20 @@
 package step1;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.LineNumberReader;
 import java.util.StringTokenizer;
 
-import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
+
+import constants.Constants;
 
 /**
  * 
  * @author chris d
  *
  */
-public class Map1 extends Mapper<LongWritable, Text, IntWritable, LongWritable> {
-	//private IntWritable p = new IntWritable();
-	//private IntWritable G = new IntWritable();
+public class Map1 extends Mapper<IntWritable, Text, IntWritable, IntWritable> {
 	private Text word = new Text();
 
 	// compute filter parameters for netid ak883
@@ -26,13 +22,9 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, LongWritable> 
 	private static float desiredDensity = 0.59f;
 	private static float wMin = 0.4f * fromNetID;
 	private static float wLimit = wMin + desiredDensity; 
-	
-	//TODO: THESE SHOULD NOT BE HARD CODED!!
-	private static int M = 100; 									// Num of rows,cols
-	private static int G = 4;									// Num of column groups
 
 	@Override
-	public void map(LongWritable key, Text value, Context context)
+	public void map(IntWritable key, Text value, Context context)
 			throws IOException, InterruptedException {
 		
 		String line = value.toString();
@@ -49,12 +41,12 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, LongWritable> 
 			if (((val >= wMin) && (val < wLimit))){
 				
 				//a. find entry number
-				long N = key.get()/12;	
+				int N = key.get()/12;	
 				
 				//b. calculate (col,row) where this entry should be placed
-				long sq = (long)Math.sqrt(N); 
-				long diff = N - sq*sq;
-				long col,row;
+				int sq = (int)Math.sqrt(N); 
+				int diff = N - sq*sq;
+				int col,row;
 				
 				if (diff==0){
 				    col = sq - 1;
@@ -73,11 +65,17 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, LongWritable> 
 				
 				// c. Once you know where it should be placed, calculate
 				//    its column_group (G) and its absolute position (p)
+<<<<<<< HEAD
 				long div = M/G;
 				int col_group_int = (int)Math.min((col/div), G-1); 			// This is to correct rounding error in div, which makes last row(s) a new group
 				
 				IntWritable column_group = new IntWritable(col_group_int);
 				LongWritable position = new LongWritable((col*M)+(row+1));
+=======
+				int c_g = (int)Math.min((col/Constants.groupLength), Constants.g-1); 			// This is to correct rounding error in div, which makes last row(s) a new group
+				IntWritable column_group = new IntWritable(c_g);
+				IntWritable position = new IntWritable((col*Constants.M)+(row+1));
+>>>>>>> 095589c816db62aa1627ad2eb622b60bbbe3bd86
 				
 				// d. write out (G,p)
 				context.write(column_group, position);

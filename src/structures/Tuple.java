@@ -1,21 +1,18 @@
 package structures;
 
-import java.io.Serializable;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
 
-public class Tuple implements Serializable, Comparable<Tuple>{
-    private static final long serialVersionUID = -4348248931257442036L;
+import org.apache.hadoop.io.WritableComparable;
+
+public class Tuple implements WritableComparable<Tuple>{
     private int p;
     private int q;
-    private int g;
     
     public Tuple(int p, int q) {
         this.p = p;
         this.q = q;
-    }
-    
-    public Tuple(int g, int p, int q) {
-        this(p, q);
-        this.g = g;
     }
     
     public int getP() {
@@ -26,13 +23,25 @@ public class Tuple implements Serializable, Comparable<Tuple>{
         return q;
     }
 
-    public int getG() {
-        return g;
-    }
-
     @Override
     public int compareTo(Tuple that) {
         if(this == that) return 0;
-        return this.p - that.p;
+        //Can't just return subtraction because of int overflow
+        long diff = this.p - that.p;
+        if(diff > 0) return 1;
+        if(diff < 0) return -1;
+        return 0;
+    }
+
+    @Override
+    public void readFields(DataInput in) throws IOException {
+        p = in.readInt();
+        q = in.readInt();
+    }
+
+    @Override
+    public void write(DataOutput out) throws IOException {
+        out.writeInt(p);
+        out.writeInt(q);
     }
 }
