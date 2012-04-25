@@ -6,8 +6,6 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.mapreduce.Reducer;
 
-import structures.DisjointSet;
-
 public class Reducer1 extends Reducer<IntWritable, LongWritable, IntWritable, LongWritable>{
 	@Override
 	/**
@@ -18,8 +16,8 @@ public class Reducer1 extends Reducer<IntWritable, LongWritable, IntWritable, Lo
 				LongWritable>.Context context)
 					throws IOException, InterruptedException {
 	    //DisjointSet set = new DisjointSet();
-		//for (IntWritable value : values) {
-		//	context.write(key,value);	
-		//}
+		for (LongWritable value : values) {
+			context.write(key,value);	
+		}
 	}
 }
