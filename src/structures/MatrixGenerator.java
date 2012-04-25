@@ -16,15 +16,15 @@ public class MatrixGenerator {
 	private static float wLimit = wMin + desiredDensity; 
 	
 	static Scanner scanner = null;
-	private boolean[][] matrix = null;
+	private float[][] matrix = null;
 	File file = null;
-	int N;
+	int size;
 	
 	public MatrixGenerator(String filename) throws IOException{
 		file = new File(filename);
 		scanner = new Scanner(file);
-		N = getMatrixSize();
-		matrix = new boolean[N][N];
+		size = getMatrixSize();
+		matrix = new float[size][size];
 	}
 
 	private int getMatrixSize() throws IOException{
@@ -34,7 +34,7 @@ public class MatrixGenerator {
 		return (int) Math.sqrt(lnr.getLineNumber());
 	}
 	// assume 0.0 <= wMin <= wLimit <= 1.0
-	private boolean getNextFilteredInput() {
+	private float getNextFilteredInput() {
 		float w = nextFloat();
 
 		if(w == -1){
@@ -42,24 +42,42 @@ public class MatrixGenerator {
 			System.exit(0);
 		}
 
-		return ( ((w >= wMin) && (w < wLimit)) ? true : false );
+		return ( ((w >= wMin) && (w < wLimit)) ? w : 0.000000000f );
 	}
 	
 	public void buildMatrix(){
-		for( int j = 0; j < N; j++ ) {
+		for( int j = 0; j < size; j++ ) {
 			for( int i = 0; i < j; i++ ) {
-				matrix[i][j] = getNextFilteredInput();
-				matrix[j][i] = getNextFilteredInput();
+				int col = i;	// For readability
+				int row = j;
+				matrix[col][row] = getNextFilteredInput();
+				col = j;	// Switch em up!
+				row = i;
+				matrix[col][row] = getNextFilteredInput();
 			}
 			matrix[j][j] = getNextFilteredInput();
 		}
 	}
 	
 	public void printMatrix(){
-		System.out.println("Matrix size: " + N);
-		for(int i = 0; i < N; i++){
-			for(int j = 0; j < N; j++)
-				System.out.print(((matrix[j][i])? 1 : 0) + " ");
+		System.out.println("Matrix size: " + size);
+		for(int row = 0;  row < size; row++){
+			for(int col = 0; col < size; col++)
+				System.out.print(((matrix[col][row]))+ " ");
+			System.out.println("");
+		}
+	}
+	
+	public void printPositions(){
+		System.out.println("");
+		for(int row = 0; row < size; row++){
+			for(int col = 0; col < size; col++){
+				int pos = (col*size)+(row+1);
+				String space = "";
+				if (pos<10)
+					space = "0";
+				System.out.print(space + pos + " ");
+			}
 			System.out.println("");
 		}
 	}
@@ -73,9 +91,69 @@ public class MatrixGenerator {
 		return value;
 	}
 
+	private static void newTest(int M, int G){
+		int[][] matrix1 = new int[M][M]; // this is the order that the values are added
+		int[][] matrix2 = new int[M][M]; // this is the new value of the vertices
+		int[][] matrix3 = new int[M][M];
+		
+		int div = M/G; 
+		
+		for(int i=1; i<M*M+1; i++){
+			int sq = (int)Math.sqrt(i); 
+			int diff = i - sq*sq;
+			int col,row;
+			if (diff==0){
+			    col = sq - 1;
+			    row = sq - 1;
+			}
+			    
+			else if (diff%2 == 0){
+			    col = sq;
+			    row = (diff-1)/2;
+			}
+
+			else{
+			    col = (diff-1)/2;
+			    row = sq;
+			}
+			matrix1[col][row] = i;
+			matrix2[col][row] = (col*M)+(row+1);
+			matrix3[col][row] = Math.min(col/div, G-1);  //TODO: THIS DOES NOT WORK CORRECTLY I FORGET THAT GROUPS OVERLAP!
+		}
+		
+		System.out.println("Position at which i is added:");
+		for(int row = M-1;  row >-1; row--){
+			for(int col = 0; col < M; col++)
+				System.out.print(((matrix1[col][row]))+ " ");
+			System.out.println("");
+		}
+		
+		System.out.println("");
+		System.out.println("Value given to the vertex at each position:");
+		for(int row = M-1;  row >-1; row--){
+			for(int col = 0; col < M; col++)
+				System.out.print(((matrix2[col][row]))+ " ");
+			System.out.println("");
+		}
+		
+		System.out.println("");
+		System.out.println("Col:");
+		for(int row = M-1;  row >-1; row--){
+			for(int col = 0; col < M; col++)
+				System.out.print(((matrix3[col][row]))+ " ");
+			System.out.println("");
+		}
+	}
+
+
 	public static void main(String[] args) throws IOException{
-		MatrixGenerator mg = new MatrixGenerator("data/data2.txt");
+		/*
+		System.out.println("Min: " + wMin);
+		System.out.println("Min: " + wLimit);
 		mg.buildMatrix();
 		mg.printMatrix();
+		mg.printPositions();
+		*/
+		newTest(10, 4);
 	}
 }
