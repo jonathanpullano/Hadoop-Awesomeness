@@ -15,7 +15,7 @@ import constants.Constants;
  * @author chris d
  *
  */
-public class Map1 extends Mapper<LongWritable, Text, IntWritable, LongWritable> {
+public class Map1 extends Mapper<IntWritable, Text, IntWritable, IntWritable> {
 	private Text word = new Text();
 
 	// compute filter parameters for netid ak883
@@ -25,7 +25,7 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, LongWritable> 
 	private static float wLimit = wMin + desiredDensity; 
 
 	@Override
-	public void map(LongWritable key, Text value, Context context)
+	public void map(IntWritable key, Text value, Context context)
 			throws IOException, InterruptedException {
 		
 		String line = value.toString();
@@ -42,12 +42,12 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, LongWritable> 
 			if (((val >= wMin) && (val < wLimit))){
 				
 				//a. find entry number
-				long N = key.get()/12;	
+				int N = key.get()/12;	
 				
 				//b. calculate (col,row) where this entry should be placed
-				long sq = (long)Math.sqrt(N); 
-				long diff = N - sq*sq;
-				long col,row;
+				int sq = (int)Math.sqrt(N); 
+				int diff = N - sq*sq;
+				int col,row;
 				
 				if (diff==0){
 				    col = sq - 1;
@@ -68,7 +68,7 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, LongWritable> 
 				//    its column_group (G) and its absolute position (p)
 				int c_g = (int)Math.min((col/Constants.groupLength), Constants.g-1); 			// This is to correct rounding error in div, which makes last row(s) a new group
 				IntWritable column_group = new IntWritable(c_g);
-				LongWritable position = new LongWritable((col*Constants.M)+(row+1));
+				IntWritable position = new IntWritable((col*Constants.M)+(row+1));
 				
 				// d. return (G,p)
 				context.write(column_group, position);

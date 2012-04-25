@@ -7,19 +7,19 @@ import java.io.IOException;
 import org.apache.hadoop.io.WritableComparable;
 
 public class Tuple implements WritableComparable<Tuple>{
-    private long p;
-    private long q;
+    private int p;
+    private int q;
     
-    public Tuple(long p, long q) {
+    public Tuple(int p, int q) {
         this.p = p;
         this.q = q;
     }
     
-    public long getP() {
+    public int getP() {
         return p;
     }
 
-    public long getQ() {
+    public int getQ() {
         return q;
     }
 
@@ -35,13 +35,13 @@ public class Tuple implements WritableComparable<Tuple>{
 
     @Override
     public void readFields(DataInput in) throws IOException {
-        p = in.readLong();
-        q = in.readLong();
+        p = in.readInt();
+        q = in.readInt();
     }
 
     @Override
     public void write(DataOutput out) throws IOException {
-        out.writeLong(p);
-        out.writeLong(q);
+        out.writeInt(p);
+        out.writeInt(q);
     }
 }
