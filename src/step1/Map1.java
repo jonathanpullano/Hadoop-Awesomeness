@@ -74,12 +74,27 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, LongWritable> 
 				// c. Once you know where it should be placed, calculate
 				//    its column_group (G) and its absolute position (p)
 				long div = M/G;
-				int c_g = (int)Math.min((col/div), G-1); 			// This is to correct rounding error in div, which makes last row(s) a new group
-				IntWritable column_group = new IntWritable(c_g);
+				int col_group_int = (int)Math.min((col/div), G-1); 			// This is to correct rounding error in div, which makes last row(s) a new group
+				
+				IntWritable column_group = new IntWritable(col_group_int);
 				LongWritable position = new LongWritable((col*M)+(row+1));
 				
-				// d. return (G,p)
+				// d. write out (G,p)
 				context.write(column_group, position);
+				
+				// e. if N is on a group boundary, you must also add it to its neighboring group
+				// previous group
+				long prev_group = Math.min((col-1)/div, G-1); 
+				if (col>0 && prev_group!=col_group_int){
+					column_group = new IntWritable(col_group_int-1);
+					context.write(column_group, position);
+				}
+				// next group
+				long next_group = Math.min((col+1)/div, G-1); 
+				if (col<M && next_group!=col_group_int){
+					column_group = new IntWritable(col_group_int+1);
+					context.write(column_group, position);
+				}
 			}
 		}
 		

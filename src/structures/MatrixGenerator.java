@@ -94,7 +94,7 @@ public class MatrixGenerator {
 	private static void newTest(int M, int G){
 		int[][] matrix1 = new int[M][M]; // this is the order that the values are added
 		int[][] matrix2 = new int[M][M]; // this is the new value of the vertices
-		int[][] matrix3 = new int[M][M];
+		String[][] matrix3 = new String[M][M];
 		
 		int div = M/G; 
 		
@@ -116,9 +116,21 @@ public class MatrixGenerator {
 			    col = (diff-1)/2;
 			    row = sq;
 			}
+			
+			int column_group = Math.min(col/div, G-1);
+			String group = "" + column_group;
+			
+			int prev_group = Math.min((col-1)/div, G-1); 
+			if (col>0 && prev_group!=column_group)
+				group = prev_group + "," + group;
+			
+			int next_group = Math.min((col+1)/div, G-1); 
+			if (col<M && next_group!=column_group)
+				group = group + ","+ next_group;
+			
 			matrix1[col][row] = i;
 			matrix2[col][row] = (col*M)+(row+1);
-			matrix3[col][row] = Math.min(col/div, G-1);  //TODO: THIS DOES NOT WORK CORRECTLY I FORGET THAT GROUPS OVERLAP!
+			matrix3[col][row] = group;  
 		}
 		
 		System.out.println("Position at which i is added:");
@@ -154,6 +166,6 @@ public class MatrixGenerator {
 		mg.printMatrix();
 		mg.printPositions();
 		*/
-		newTest(10, 4);
+		newTest(30, 3);
 	}
 }

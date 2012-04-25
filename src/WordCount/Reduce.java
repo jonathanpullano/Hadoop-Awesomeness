@@ -12,6 +12,7 @@ public class Reduce extends Reducer<Text, IntWritable, Text, IntWritable> {
 			IntWritable>.Context context)
 					throws IOException, InterruptedException {
 		int sum = 0;
+	
 		for (IntWritable value : values) {
 			sum += value.get();
 		}
