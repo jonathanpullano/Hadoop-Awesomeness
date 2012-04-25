@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 public class Reducer1 extends Reducer<IntWritable, LongWritable, IntWritable, LongWritable>{
