@@ -9,7 +9,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import constants.Constants;
-import constants.Constants;
 /**
  * 
  * @author chris d
@@ -78,6 +77,7 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 					column_group = new IntWritable(col_group_int-1);
 					context.write(column_group, position);
 				}
+				
 				// next group
 				long next_group = Math.min((col+1)/div, Constants.g-1); 
 				if (col<Constants.M && next_group!=col_group_int){
