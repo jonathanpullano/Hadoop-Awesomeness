@@ -2,7 +2,6 @@ package step1;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
-
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -65,31 +64,26 @@ public class Map1 extends Mapper<IntWritable, Text, IntWritable, IntWritable> {
 				
 				// c. Once you know where it should be placed, calculate
 				//    its column_group (G) and its absolute position (p)
-<<<<<<< HEAD
-				long div = M/G;
-				int col_group_int = (int)Math.min((col/div), G-1); 			// This is to correct rounding error in div, which makes last row(s) a new group
+				long div = Constants.M/Constants.g;
+				int col_group_int = (int)Math.min((col/div), Constants.g-1); 			// This is to correct rounding error in div, which makes last row(s) a new group
 				
 				IntWritable column_group = new IntWritable(col_group_int);
-				LongWritable position = new LongWritable((col*M)+(row+1));
-=======
-				int c_g = (int)Math.min((col/Constants.groupLength), Constants.g-1); 			// This is to correct rounding error in div, which makes last row(s) a new group
-				IntWritable column_group = new IntWritable(c_g);
 				IntWritable position = new IntWritable((col*Constants.M)+(row+1));
->>>>>>> 095589c816db62aa1627ad2eb622b60bbbe3bd86
+				
 				
 				// d. write out (G,p)
 				context.write(column_group, position);
 				
 				// e. if N is on a group boundary, you must also add it to its neighboring group
 				// previous group
-				long prev_group = Math.min((col-1)/div, G-1); 
+				long prev_group = Math.min((col-1)/div, Constants.g-1); 
 				if (col>0 && prev_group!=col_group_int){
 					column_group = new IntWritable(col_group_int-1);
 					context.write(column_group, position);
 				}
 				// next group
-				long next_group = Math.min((col+1)/div, G-1); 
-				if (col<M && next_group!=col_group_int){
+				long next_group = Math.min((col+1)/div, Constants.g-1); 
+				if (col<Constants.M && next_group!=col_group_int){
 					column_group = new IntWritable(col_group_int+1);
 					context.write(column_group, position);
 				}
