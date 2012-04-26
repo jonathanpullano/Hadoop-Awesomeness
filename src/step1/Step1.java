@@ -3,7 +3,6 @@ package step1;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
@@ -18,16 +17,16 @@ public class Step1{
 		job.setJarByClass(Step1.class);
 
 		job.setOutputKeyClass(IntWritable.class);
-		job.setOutputValueClass(LongWritable.class);
+		job.setOutputValueClass(IntWritable.class);
 
 		job.setMapperClass(Map1.class);
-		//job.setReducerClass(Reducer1.class);
+		job.setReducerClass(Reducer1.class);
 
 		job.setInputFormatClass(TextInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
 
 		FileInputFormat.addInputPath(job, new Path("data/production_10000.txt"));
-		FileOutputFormat.setOutputPath(job, new Path("output/output2"));
+		FileOutputFormat.setOutputPath(job, new Path("data/output/"));
 
 		job.waitForCompletion(true);
 	}

@@ -48,5 +48,11 @@ public class Reducer1 extends Reducer<IntWritable, IntWritable, IntWritable, Tup
 	    }
 	    for(IntWritable value : values)
 	        context.write(key, new Tuple(value.get(), set.find(value.get())));
+	    //DisjointSet set = new DisjointSet(Constants.groupLength * Constants.M);
+	    
+//	    for (IntWritable value : values) {
+//	    	int k = key.get();
+//			context.write(new IntWritable(k*5),value);
+//		}
 	}
 }
