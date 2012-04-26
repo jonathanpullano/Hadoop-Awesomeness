@@ -17,7 +17,9 @@ public class Reducer1 extends Reducer<IntWritable, IntWritable, IntWritable, Int
 			Reducer<IntWritable, IntWritable, IntWritable, IntWritable>. Context context)
 					throws IOException, InterruptedException {
 	    DisjointSet set = new DisjointSet(Constants.groupLength * Constants.M);
-		for (IntWritable value : values) {
+		
+	    
+	    for (IntWritable value : values) {
 			context.write(key,value);
 		}
 	}

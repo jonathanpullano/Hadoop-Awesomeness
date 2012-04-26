@@ -11,7 +11,8 @@ import constants.Constants;
 /**
  * 
  * @author chris d
- *
+ * Reads in float values. Checks whether each value is in range. If it is, it assigns it a 
+ * int representing its position (p) and a column group (G).
  */
 public class Map1 extends Mapper<IntWritable, Text, IntWritable, IntWritable> {
 	private Text word = new Text();
