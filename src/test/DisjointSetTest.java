@@ -9,17 +9,6 @@ import structures.DisjointSet;
 
 public class DisjointSetTest {
     
-    @Test(expected=IndexOutOfBoundsException.class)
-    public void testIndexOutOfBoundsException() {
-        DisjointSet set = new DisjointSet(1);
-        set.isConnected(1,1);
-    }
-    
-    @Test(expected=IndexOutOfBoundsException.class)
-    public void testIndexOutOfBoundsException2() {
-        DisjointSet set = new DisjointSet(0);
-    }
-    
     @Test
     public void testConnected1() {
         DisjointSet set = new DisjointSet(1);
