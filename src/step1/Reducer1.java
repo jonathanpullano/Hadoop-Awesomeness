@@ -16,11 +16,11 @@ public class Reducer1 extends Reducer<IntWritable, IntWritable, IntWritable, Int
 	protected void reduce(IntWritable key, Iterable<IntWritable> values,
 			Reducer<IntWritable, IntWritable, IntWritable, IntWritable>. Context context)
 					throws IOException, InterruptedException {
-	    DisjointSet set = new DisjointSet(Constants.groupLength * Constants.M);
-		
+	    //DisjointSet set = new DisjointSet(Constants.groupLength * Constants.M);
 	    
 	    for (IntWritable value : values) {
-			context.write(key,value);
+	    	int k = key.get();
+			context.write(new IntWritable(k*5),value);
 		}
 	}
 }

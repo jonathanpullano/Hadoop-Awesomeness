@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
@@ -15,11 +16,11 @@ import constants.Constants;
  * Reads in float values. Checks whether each value is in range. If it is, it assigns it a 
  * int representing its position (p) and a column group (G).
  */
-public class Map1 extends Mapper<IntWritable, Text, IntWritable, IntWritable> {
+public class Map1 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 	private Text word = new Text();
 
 	@Override
-	public void map(IntWritable key, Text value, Context context)
+	public void map(LongWritable key, Text value, Context context)
 			throws IOException, InterruptedException {
 		
 		String line = value.toString();
@@ -36,7 +37,7 @@ public class Map1 extends Mapper<IntWritable, Text, IntWritable, IntWritable> {
 			if (((val >= Constants.wMin) && (val < Constants.wLimit))){
 				
 				//a. find entry number
-				int N = key.get()/12;	
+				int N = (int)key.get()/12;	
 				
 				//b. calculate (col,row) where this entry should be placed
 				int sq = (int)Math.sqrt(N); 

@@ -3,7 +3,6 @@ package step1;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
@@ -21,7 +20,7 @@ public class Step1{
 		job.setOutputValueClass(IntWritable.class);
 
 		job.setMapperClass(Map1.class);
-		//job.setReducerClass(Reducer1.class);
+		job.setReducerClass(Reducer1.class);
 
 		job.setInputFormatClass(TextInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
