@@ -6,7 +6,7 @@ public class Constants {
     public static int N = 10000; //Total size of the file (probably should be read)
     public static int M = (int) Math.sqrt(N); 
     public static int g = 5; //Number of Column Groups
-    public static int groupLength = M/g; // Length of a ColumnGroup
+    public static int groupLength = M/g; // Length of a ColumnGroup (not including boundaries)
     public static int groupSize = groupLength*M; // Number of elements in a column group
 
     // compute filter parameters for netid ak883
