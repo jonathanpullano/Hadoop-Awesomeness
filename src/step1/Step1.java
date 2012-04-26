@@ -27,7 +27,7 @@ public class Step1{
 		job.setOutputFormatClass(TextOutputFormat.class);
 
 		FileInputFormat.addInputPath(job, new Path("data/production_10000.txt"));
-		FileOutputFormat.setOutputPath(job, new Path("output/output2"));
+		FileOutputFormat.setOutputPath(job, new Path("data/output/"));
 
 		job.waitForCompletion(true);
 	}
