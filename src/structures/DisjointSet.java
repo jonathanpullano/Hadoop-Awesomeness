@@ -6,6 +6,7 @@ import java.util.HashSet;
  * @author jonathan
  */
 public class DisjointSet {
+    //TODO: Memory optimize
     private int[] parent;
 
     /**
