@@ -18,7 +18,7 @@ public class Step1{
 		job.setJarByClass(Step1.class);
 
 		job.setOutputKeyClass(IntWritable.class);
-		job.setOutputValueClass(LongWritable.class);
+		job.setOutputValueClass(IntWritable.class);
 
 		job.setMapperClass(Map1.class);
 		//job.setReducerClass(Reducer1.class);
