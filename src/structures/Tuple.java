@@ -17,10 +17,10 @@ public class Tuple implements WritableComparable<Tuple> {
         this.p = p;
         this.q = q;
     }
-    
-    public Tuple(Tuple t){
-    	this.p = t.p;
-    	this.q = t.q;
+
+    public Tuple(final Tuple t) {
+        this.p = t.p;
+        this.q = t.q;
     }
 
     public int getP() {
@@ -45,9 +45,8 @@ public class Tuple implements WritableComparable<Tuple> {
      */
     public int compareTo(final Tuple that) {
         if (this == that) return 0;
-        int pDiff = this.p - that.p;
-        if(pDiff == 0)
-            return this.q - that.q;
+        final int pDiff = this.p - that.p;
+        if (pDiff == 0) return this.q - that.q;
         return pDiff;
     }
 

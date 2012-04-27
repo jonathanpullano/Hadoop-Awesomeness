@@ -9,25 +9,26 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-public class Step1{
-	public static void main(String[] args) throws Exception {
-		Configuration conf = new Configuration();
+public class Step1 {
+    public static void main(final String[] args) throws Exception {
+        final Configuration conf = new Configuration();
 
-		Job job = new Job(conf, "Step1");
-		job.setJarByClass(Step1.class);
+        final Job job = new Job(conf, "Step1");
+        job.setJarByClass(Step1.class);
 
-		job.setOutputKeyClass(IntWritable.class);
-		job.setOutputValueClass(IntWritable.class);
+        job.setOutputKeyClass(IntWritable.class);
+        job.setOutputValueClass(IntWritable.class);
 
-		job.setMapperClass(Map1.class);
-		job.setReducerClass(Reducer1.class);
+        job.setMapperClass(Map1.class);
+        job.setReducerClass(Reducer1.class);
 
-		job.setInputFormatClass(TextInputFormat.class);
-		job.setOutputFormatClass(TextOutputFormat.class);
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
 
-		FileInputFormat.addInputPath(job, new Path("data/production_10000.txt"));
-		FileOutputFormat.setOutputPath(job, new Path("data/output/"));
+        FileInputFormat
+                .addInputPath(job, new Path("data/production_10000.txt"));
+        FileOutputFormat.setOutputPath(job, new Path("data/output/"));
 
-		job.waitForCompletion(true);
-	}
+        job.waitForCompletion(true);
+    }
 }
