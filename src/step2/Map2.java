@@ -8,6 +8,8 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+import structures.MatrixUtilities;
+
 import constants.Constants;
 //import org.apache.hadoop.mapreduce.Mapper.Context;
 
@@ -30,32 +32,11 @@ public class Map2 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 			int p = Integer.parseInt(word_p.toString());
 			int q = Integer.parseInt(word_q.toString());
 			
-			if (isBoundary(p)){
+			if (MatrixUtilities.isBoundary(p)!=0){
 				context.write(new IntWritable(p), new IntWritable(q));
 			}
 		}
 	}
 	
-	private static boolean isBoundary(int position){
-		int M = Constants.M;
-		int g = Constants.g;
-		int col = (position-1)/M;
-		
-		if (col==0 || col==M-1)
-			return false;
-		
-		int column_group = getColGroup(M, g, col);
-		
-		if (column_group!=getColGroup(M, g, col-1) 
-				|| column_group!=getColGroup(M, g, col+1))
-			return true;
-		else
-			return false;
-	}
 	
-	public static int getColGroup(int M, int G, int col){
-		int column_group = col/(M/G);
-		if (column_group==G) column_group--;
-		return column_group;
-	}
 }

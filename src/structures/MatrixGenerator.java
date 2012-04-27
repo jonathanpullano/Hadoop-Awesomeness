@@ -163,7 +163,7 @@ public class MatrixGenerator {
 		System.out.println("Columns:");
 		for(int row = M-1;  row >-1; row--){
 			for(int col = 0; col < M; col++){
-				int c = (matrix2[col][row]-1)/M;
+				int c = getCol(M, matrix2[col][row]);
 				System.out.print(c + " ");
 			}
 			System.out.println("");
@@ -208,6 +208,6 @@ public class MatrixGenerator {
 		mg.printMatrix();
 		mg.printPositions();
 		*/
-		newTest(16, 3);
+		newTest(17, 3);
 	}
 }

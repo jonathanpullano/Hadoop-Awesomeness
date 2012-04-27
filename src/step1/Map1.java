@@ -8,6 +8,8 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+import structures.MatrixUtilities;
+
 import constants.Constants;
 /**
  * 
@@ -58,8 +60,7 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 				
 				// c. Once you know where it should be placed, calculate
 				//    its column_group (G) and its absolute position (p)
-				long div = Constants.M/Constants.g;
-				int col_group_int = (int)Math.min((col/div), Constants.g-1); 			// This is to correct rounding error in div, which makes last row(s) a new group
+				int col_group_int = MatrixUtilities.getColumnGroup(Constants.M, Constants.g, col);
 				
 				IntWritable column_group = new IntWritable(col_group_int);
 				IntWritable position = new IntWritable((col*Constants.M)+(row+1));
@@ -68,18 +69,9 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 				context.write(column_group, position);
 				
 				// e. if N is on a group boundary, you must also add it to its neighboring group
-				long prev_group = Math.min((col-1)/div, Constants.g-1); 
-				long next_group = Math.min((col+1)/div, Constants.g-1);
-				// previous group
-				if (col>0 && prev_group!=col_group_int){
-					column_group = new IntWritable(col_group_int-1);
-					context.write(column_group, position);
-				}
-				// next group
-				else if (col<Constants.M && next_group!=col_group_int){
-					column_group = new IntWritable(col_group_int+1);
-					context.write(column_group, position);
-				}
+				int boundary = MatrixUtilities.isBoundary(position.get());
+				if(boundary!=0)
+					context.write(new IntWritable(col_group_int+boundary), position);
 			}
 		}
 	}
