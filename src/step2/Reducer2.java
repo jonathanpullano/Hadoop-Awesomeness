@@ -22,8 +22,8 @@ public class Reducer2 extends Reducer<IntWritable, Tuple, IntWritable, Tuple> {
                 * Constants.M);
 
         final Iterator<Tuple> it = tuples.iterator();
-
         Tuple prevTuple = it.next();
+        prevTuple = new Tuple(prevTuple.getP(), prevTuple.getQ());
         System.out.println("**prevTuple (" + prevTuple.getP() + ", "
                 + prevTuple.getQ() + ")\n");
 

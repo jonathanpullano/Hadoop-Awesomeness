@@ -17,6 +17,11 @@ public class Tuple implements WritableComparable<Tuple> {
         this.p = p;
         this.q = q;
     }
+    
+    public Tuple(Tuple t){
+    	this.p = t.p;
+    	this.q = t.q;
+    }
 
     public int getP() {
         return p;
