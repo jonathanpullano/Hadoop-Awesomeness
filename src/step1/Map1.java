@@ -47,12 +47,10 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 				    col = sq - 1;
 				    row = sq - 1;
 				}
-				    
 				else if (diff%2 == 0){
 				    col = sq;
 				    row = (diff-1)/2;
 				}
-
 				else{
 				    col = (diff-1)/2;
 				    row = sq;
@@ -66,26 +64,23 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 				IntWritable column_group = new IntWritable(col_group_int);
 				IntWritable position = new IntWritable((col*Constants.M)+(row+1));
 				
-				
 				// d. write out (G,p)
 				context.write(column_group, position);
 				
 				// e. if N is on a group boundary, you must also add it to its neighboring group
-				// previous group
 				long prev_group = Math.min((col-1)/div, Constants.g-1); 
+				long next_group = Math.min((col+1)/div, Constants.g-1);
+				// previous group
 				if (col>0 && prev_group!=col_group_int){
 					column_group = new IntWritable(col_group_int-1);
 					context.write(column_group, position);
 				}
-				
 				// next group
-				long next_group = Math.min((col+1)/div, Constants.g-1); 
-				if (col<Constants.M && next_group!=col_group_int){
+				else if (col<Constants.M && next_group!=col_group_int){
 					column_group = new IntWritable(col_group_int+1);
 					context.write(column_group, position);
 				}
 			}
 		}
-		
 	}
 }

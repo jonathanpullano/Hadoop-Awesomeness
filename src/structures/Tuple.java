@@ -58,4 +58,9 @@ public class Tuple implements WritableComparable<Tuple>{
         out.writeInt(p);
         out.writeInt(q);
     }
+    
+    @Override
+    public String toString(){
+    	return this.p + " " + this.q;
+    }
 }

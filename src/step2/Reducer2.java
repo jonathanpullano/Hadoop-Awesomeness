@@ -17,7 +17,7 @@ public class Reducer2 extends Reducer<IntWritable, Tuple, IntWritable, Tuple>{
 	protected void reduce(IntWritable key, Iterable<Tuple> tuples,
 			Reducer<IntWritable, Tuple, IntWritable, Tuple>. Context context)
 					throws IOException, InterruptedException {
-	    DisjointSet set = new DisjointSet(2*Constants.M);
+	    DisjointSet set = new DisjointSet((2*Constants.g - 2)*Constants.M);
 	    
 	    Iterator<Tuple> it = tuples.iterator();
 	    Tuple prev = null;

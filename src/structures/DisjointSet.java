@@ -1,24 +1,27 @@
 package structures;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
  * @author jonathan
  */
 public class DisjointSet {
-    //TODO: Memory optimize
-    private int[] parent;
+    private HashMap<Integer, Integer> parent;
 
     /**
      * Constructor
-     * @param xSize x dimension of this graph
-     * @param ySize y dimension of this graph
+     */
+    public DisjointSet() {
+        parent = new HashMap<Integer, Integer>();
+    }
+    
+    /**
+     * Constructor
+     * ESTIMATED group size. It's better to guess low.
      */
     public DisjointSet(int size) {
-        if(size == 0) throw new IndexOutOfBoundsException("Invalid Size");
-        parent = new int[size];
-        for(int i = 0; i < size; i++)
-            parent[i] = i;
+        parent = new HashMap<Integer, Integer>(size);
     }
 
     /**
@@ -29,9 +32,9 @@ public class DisjointSet {
         int parent2 = find(p2);
         
         if(p1 >= p2) 
-            parent[parent1] = parent2;
+            parent.put(parent1, parent2);
         else
-            parent[parent2] = parent1;
+            parent.put(parent2, parent1);
     }
     
     /**
@@ -43,13 +46,24 @@ public class DisjointSet {
     }
     
     /**
+     * Gets the parent of a node
+     */
+    public int parentOf(int p) {
+        if(parent.containsKey(p))
+            return parent.get(p);
+        return p;
+    }
+    
+    /**
      * Returns the parent that identifies this component
      */
     public int find(int p) {
-        while(p != parent[p]) p = parent[p];
+        while(p != parentOf(p)) p = parentOf(p);
+        
+        //Auto-balance
         HashSet<Integer> examined = new HashSet<Integer>();
         for(Integer e : examined) {
-            parent[e] = p;
+            parent.put(p, parent.get(e));
         }
         return p;
     }
