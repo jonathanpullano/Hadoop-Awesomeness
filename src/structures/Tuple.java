@@ -9,8 +9,9 @@ import org.apache.hadoop.io.WritableComparable;
 public class Tuple implements WritableComparable<Tuple>{
     private int p;
     private int q;
+    public Tuple(){};
     
-    public Tuple(int p, int q) {
+	public Tuple(int p, int q) {
         this.p = p;
         this.q = q;
     }
@@ -19,7 +20,15 @@ public class Tuple implements WritableComparable<Tuple>{
         return p;
     }
 
-    public int getQ() {
+    public void setP(int p) {
+		this.p = p;
+	}
+
+	public void setQ(int q) {
+		this.q = q;
+	}
+
+	public int getQ() {
         return q;
     }
 
@@ -38,7 +47,12 @@ public class Tuple implements WritableComparable<Tuple>{
         p = in.readInt();
         q = in.readInt();
     }
-
+    
+    @Override
+    public String toString(){
+    	return Integer.toString(p) + " " + Integer.toString(q);
+    }
+    
     @Override
     public void write(DataOutput out) throws IOException {
         out.writeInt(p);

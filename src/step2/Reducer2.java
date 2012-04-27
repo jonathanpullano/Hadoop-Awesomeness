@@ -1,6 +1,7 @@
 package step2;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.hadoop.io.IntWritable;
@@ -10,35 +11,27 @@ import structures.DisjointSet;
 import structures.Tuple;
 import constants.Constants;
 
-public class Reducer2 extends Reducer<IntWritable, Tuple, IntWritable, IntWritable>{
+public class Reducer2 extends Reducer<IntWritable, Tuple, IntWritable, Tuple>{
 	
 	@Override
 	protected void reduce(IntWritable key, Iterable<Tuple> tuples,
-			Reducer<IntWritable, Tuple, IntWritable, IntWritable>. Context context)
+			Reducer<IntWritable, Tuple, IntWritable, Tuple>. Context context)
 					throws IOException, InterruptedException {
 	    DisjointSet set = new DisjointSet(2*Constants.M);
 	    
 	    Iterator<Tuple> it = tuples.iterator();
-	    Tuple prev = it.next();
+	    Tuple prev = null;
 	    
 	    for (;it.hasNext();) {
 	    	Tuple tuple = it.next();
-	    	if(prev.getP() == tuple.getP()){
+	    	
+	    	System.out.println("Working with tuple (" + tuple.getP() + ", " + tuple.getQ() + ")");
+	    	
+	    	if(prev != null && prev.getP() == tuple.getP()){
 	    		set.union(tuple.getP(), tuple.getQ());
 	    		set.union(prev.getP(), prev.getQ());
-	    	}
-	    	prev = tuple;
-		}
-	    
-	    Iterator<Tuple> it2 = tuples.iterator();
-	    prev = it.next();
-	    
-	    for (;it2.hasNext();) {
-	    	Tuple tuple = it2.next();
-	    	if(prev.getP() == tuple.getP()){
-	    		context.write(new IntWritable(set.find(tuple.getP())), new IntWritable(tuple.getQ()));
-	    		context.write(new IntWritable(set.find(prev.getP())), new IntWritable(prev.getQ()));
-	    	}
+	    		context.write(key, new Tuple(tuple.getP(), set.find(tuple.getP())));
+	    	}	    	
 	    	prev = tuple;
 		}
 	}
