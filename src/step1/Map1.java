@@ -38,7 +38,7 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 			if (((val >= Constants.wMin) && (val < Constants.wLimit))){
 				
 				//a. find entry number
-				int N = (int)key.get()/12;	
+				int N = (int)(key.get()/12)+1;	
 				
 				//b. calculate (col,row) where this entry should be placed
 				int sq = (int)Math.sqrt(N); 
