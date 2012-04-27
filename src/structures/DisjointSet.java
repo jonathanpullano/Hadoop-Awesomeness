@@ -31,7 +31,7 @@ public class DisjointSet {
         int parent1 = find(p1);
         int parent2 = find(p2);
         
-        if(p1 >= p2) 
+        if(parent1 >= parent2) 
             parent.put(parent1, parent2);
         else
             parent.put(parent2, parent1);
@@ -58,12 +58,16 @@ public class DisjointSet {
      * Returns the parent that identifies this component
      */
     public int find(int p) {
-        while(p != parentOf(p)) p = parentOf(p);
+        HashSet<Integer> examined = new HashSet<Integer>();
+        examined.add(p);
+        while(p != parentOf(p)) {
+            p = parentOf(p);
+            examined.add(p);
+        }
         
         //Auto-balance
-        HashSet<Integer> examined = new HashSet<Integer>();
         for(Integer e : examined) {
-            parent.put(p, parent.get(e));
+            parent.put(e, p);
         }
         return p;
     }
