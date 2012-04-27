@@ -35,13 +35,15 @@ public class Tuple implements WritableComparable<Tuple> {
     }
 
     @Override
+    /**
+     * Sort on P, then on Q
+     */
     public int compareTo(final Tuple that) {
         if (this == that) return 0;
-        // Can't just return subtraction because of int overflow
-        final long diff = p - that.p;
-        if (diff > 0) return 1;
-        if (diff < 0) return -1;
-        return 0;
+        int pDiff = this.p - that.p;
+        if(pDiff == 0)
+            return this.q - that.q;
+        return pDiff;
     }
 
     @Override
