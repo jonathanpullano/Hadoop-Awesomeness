@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.util.Scanner;
 
+import constants.Constants;
+
 public class MatrixGenerator {
 
 	// compute filter parameters for netid ak883
@@ -89,7 +91,7 @@ public class MatrixGenerator {
 			scanner.close();
 		return value;
 	}
-
+	
 	private static void newTest(int M, int G){
 		int[][] matrix1 = new int[M][M]; // this is the order that the values are added
 		int[][] matrix2 = new int[M][M]; // this is the new value of the vertices
@@ -131,14 +133,15 @@ public class MatrixGenerator {
 			matrix2[col][row] = (col*M)+(row+1);
 			matrix3[col][row] = group;  
 		}
-		
+		/*
 		System.out.println("Position at which i is added:");
 		for(int row = M-1;  row >-1; row--){
 			for(int col = 0; col < M; col++)
 				System.out.print(((matrix1[col][row]))+ " ");
 			System.out.println("");
 		}
-		
+		*/
+		/*
 		System.out.println("");
 		System.out.println("Value given to the vertex at each position:");
 		for(int row = M-1;  row >-1; row--){
@@ -146,7 +149,8 @@ public class MatrixGenerator {
 				System.out.print(((matrix2[col][row]))+ " ");
 			System.out.println("");
 		}
-		
+		*/
+		/*
 		System.out.println("");
 		System.out.println("Col:");
 		for(int row = M-1;  row >-1; row--){
@@ -154,6 +158,45 @@ public class MatrixGenerator {
 				System.out.print(((matrix3[col][row]))+ " ");
 			System.out.println("");
 		}
+		*/
+		System.out.println("");
+		System.out.println("Columns:");
+		for(int row = M-1;  row >-1; row--){
+			for(int col = 0; col < M; col++){
+				int c = (matrix2[col][row]-1)/M;
+				System.out.print(c + " ");
+			}
+			System.out.println("");
+		}
+		
+		System.out.println("");
+		System.out.println("Border Columns:");
+		for(int row = M-1;  row >-1; row--){
+			for(int col = 0; col < M; col++){
+				int p = matrix2[col][row];
+				int c = getCol(M, p);
+				int out;
+				int column_group = getColGroup(M, G, c);
+				if (c==0 || c==M-1)
+					out=0;
+				else if (column_group!=getColGroup(M, G, c+1) || column_group!=getColGroup(M, G, c-1))
+					out=1;
+				else 
+					out=0;
+				System.out.print(out + " ");
+			}
+			System.out.println("");
+		}
+	}
+	
+	public static int getCol(int M, int p){
+		return (p-1)/M;
+	}
+	
+	public static int getColGroup(int M, int G, int col){
+		int column_group = col/(M/G);
+		if (column_group==G) column_group--;
+		return column_group;
 	}
 
 
@@ -165,6 +208,6 @@ public class MatrixGenerator {
 		mg.printMatrix();
 		mg.printPositions();
 		*/
-		newTest(30, 3);
+		newTest(16, 3);
 	}
 }
