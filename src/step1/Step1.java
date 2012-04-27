@@ -9,6 +9,8 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
+import structures.IntComparator;
+
 public class Step1 {
     public static void main(final String[] args) throws Exception {
         final Configuration conf = new Configuration();
@@ -20,13 +22,15 @@ public class Step1 {
         job.setOutputValueClass(IntWritable.class);
 
         job.setMapperClass(Map1.class);
-        job.setReducerClass(Reducer1.class);
+        //job.setReducerClass(Reducer1.class);
 
+        job.setSortComparatorClass(IntComparator.class);
+        
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
         FileInputFormat
-                .addInputPath(job, new Path("data/production_10000.txt"));
+                .addInputPath(job, new Path("data/data5.txt"));
         FileOutputFormat.setOutputPath(job, new Path("data/output/"));
 
         job.waitForCompletion(true);
