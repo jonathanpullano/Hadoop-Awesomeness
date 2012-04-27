@@ -22,36 +22,21 @@ public class Reducer2 extends Reducer<IntWritable, Tuple, IntWritable, Tuple> {
                 * Constants.M);
 
         final Iterator<Tuple> it = tuples.iterator();
-        Tuple prevTuple = it.next();
-        prevTuple = new Tuple(prevTuple.getP(), prevTuple.getQ());
+        Tuple prevTuple = null;
+        Tuple CurTuple = null;
 
-        System.out.println("**prevTuple (" + prevTuple.getP() + ", "
-                + prevTuple.getQ() + ")\n");
-
-        Tuple CurTuple = it.next();
-        System.out.println("**CurTuple (" + CurTuple.getP() + ", "
-                + CurTuple.getQ() + ")\n");
-
-        for (; it.hasNext();) {
-            System.out.println("Working with \n prevTuple (" + prevTuple.getP()
-                    + ", " + prevTuple.getQ() + ")\n CurTuple ("
-                    + CurTuple.getP() + ", " + CurTuple.getQ() + ")");
+        do {
+            prevTuple = new Tuple(it.next());
+            CurTuple = new Tuple(it.next());
 
             if (prevTuple.getP() == CurTuple.getP()) {
-
                 set.union(prevTuple.getP(), prevTuple.getQ());
                 set.union(CurTuple.getP(), CurTuple.getQ());
                 context.write(key,
                         new Tuple(CurTuple.getP(), set.find(CurTuple.getP())));
                 context.write(key,
                         new Tuple(prevTuple.getP(), set.find(prevTuple.getP())));
-            } else System.out.println("Skipped tuple \n prevTuple ("
-                    + prevTuple.getP() + ", " + prevTuple.getQ()
-                    + ")\n CurTuple (" + CurTuple.getP() + ", "
-                    + CurTuple.getQ() + ")");
-
-            prevTuple = CurTuple;
-            CurTuple = it.next();
-        }
+            }
+        } while (it.hasNext());
     }
 }

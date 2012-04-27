@@ -10,25 +10,27 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-public class WordCount{
-	public static void main(String[] args) throws Exception {
-		Configuration conf = new Configuration();
+public class WordCount {
+    public static void main(final String[] args) throws Exception {
+        final Configuration conf = new Configuration();
 
-		Job job = new Job(conf, "wordcount");
-		job.setJarByClass(WordCount.class);
+        final Job job = new Job(conf, "wordcount");
+        job.setJarByClass(WordCount.class);
 
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(IntWritable.class);
 
-		job.setMapperClass(Map.class);
-		job.setReducerClass(Reduce.class);
+        job.setMapperClass(Map.class);
+        job.setReducerClass(Reduce.class);
 
-		job.setInputFormatClass(TextInputFormat.class);
-		job.setOutputFormatClass(TextOutputFormat.class);
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
 
-		FileInputFormat.addInputPath(job, new Path("/home/conroy/Documents/wordcount/input/"));
-		FileOutputFormat.setOutputPath(job, new Path("/home/conroy/Desktop/output"));
+        FileInputFormat.addInputPath(job, new Path(
+                "/home/conroy/Documents/wordcount/input/"));
+        FileOutputFormat.setOutputPath(job, new Path(
+                "/home/conroy/Desktop/output"));
 
-		job.waitForCompletion(true);
-	}
+        job.waitForCompletion(true);
+    }
 }
