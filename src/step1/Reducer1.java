@@ -37,9 +37,8 @@ public class Reducer1 extends Reducer<IntWritable, IntWritable, IntWritable, Tup
 	        if(p % len != 0 && memory.size() > 0 && memory.get(memory.size() - 1) == p - 1) //bottom
 	            set.union(p, p-1);
 	        
+	        context.write(key, new Tuple(p, set.find(p)));
 	        memory.add(p);
 	    }
-	    for(IntWritable value : values)
-	        context.write(key, new Tuple(value.get(), set.find(value.get())));
 	}
 }
