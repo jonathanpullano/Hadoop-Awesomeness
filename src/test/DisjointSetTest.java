@@ -35,4 +35,19 @@ public class DisjointSetTest {
         assertTrue(set.isConnected(1, 5));
         assertFalse(set.isConnected(7, 8));
     }
+    
+    @Test
+    public void testFind() {
+        DisjointSet set = new DisjointSet(10);
+        set.union(6, 3);
+        set.union(6, 4);
+        assertTrue(set.find(6) == 3);
+        assertTrue(set.find(3) == 3);
+        assertTrue(set.find(4) == 3);
+        set.union(10, 7);
+        set.union(10, 8);
+        assertTrue(set.find(10) == 7);
+        assertTrue(set.find(7) == 7);
+        assertTrue(set.find(8) == 7);
+    }
 }
