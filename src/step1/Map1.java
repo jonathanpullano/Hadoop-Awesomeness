@@ -79,40 +79,4 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
             }
         }
     }
-				
-				//b. calculate (col,row) where this entry should be placed
-				int sq = (int)Math.sqrt(N); 
-				int diff = N - sq*sq;
-				int col,row;
-				
-				if (diff==0){
-				    col = sq - 1;
-				    row = sq - 1;
-				}
-				else if (diff%2 == 0){
-				    col = sq;
-				    row = (diff-1)/2;
-				}
-				else{
-				    col = (diff-1)/2;
-				    row = sq;
-				} 
-				
-				// c. Once you know where it should be placed, calculate
-				//    its column_group (G) and its absolute position (p)
-				int col_group_int = MatrixUtilities.getColumnGroup(Constants.M, Constants.g, col);
-				
-				IntWritable column_group = new IntWritable(col_group_int);
-				IntWritable position = new IntWritable((col*Constants.M)+(row+1));
-				
-				// d. write out (G,p)
-				context.write(column_group, position);
-				
-				// e. if N is on a group boundary, you must also add it to its neighboring group
-				int boundary = MatrixUtilities.isBoundary(position.get());
-				if(boundary!=0)
-					context.write(new IntWritable(col_group_int+boundary), position);
-			}
-		}
-	}
 }
