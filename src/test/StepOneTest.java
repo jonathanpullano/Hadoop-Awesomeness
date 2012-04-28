@@ -20,13 +20,13 @@ public class StepOneTest {
     
     @Test
     public void testAllZeros() throws Exception {
-        //stepOne.run("data/step1/test2.txt");
-        assertTrue(Util.checkOutput("data/output/part-r-00000", "data/step2/test2.txt"));
+        stepOne.run("data/step1/test2.txt");
+        assertTrue(Util.checkOutput("data/output/part-r-00000", "data/step1/ans2.txt"));
     }
     
     @Test
     public void testComponents() throws Exception {
-        //stepOne.run("data/step1/test3.txt");
-        assertTrue(Util.checkOutput("data/output/part-r-00000", "data/step3/test2.txt"));
+        stepOne.run("data/step1/test3.txt");
+        assertTrue(Util.checkOutput("data/output/part-r-00000", "data/step1/ans3.txt"));
     }
 }
