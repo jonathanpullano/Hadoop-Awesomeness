@@ -3,4 +3,4 @@ lib/*
 .classpath*
 /data/*
 *.orig
-
+.gitignore~
