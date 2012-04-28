@@ -196,6 +196,6 @@ public class MatrixGenerator {
          * System.out.println("Min: " + wMin); System.out.println("Min: " +
          * wLimit); mg.buildMatrix(); mg.printMatrix(); mg.printPositions();
          */
-        newTest(17, 3);
+        newTest(3, 3);
     }
 }
