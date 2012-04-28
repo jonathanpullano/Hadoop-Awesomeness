@@ -21,12 +21,16 @@ public class Reducer1 extends
             final Iterable<IntWritable> values,
             final Reducer<IntWritable, IntWritable, IntWritable, Tuple>.Context context)
             throws IOException, InterruptedException {
+        
         final DisjointSet set = new DisjointSet(Constants.groupSize);
         final ArrayList<Integer> memory = new ArrayList<Integer>();
+        
         int len;
         if ((key.get() == 0) || (key.get() == Constants.g - 1))
             len = Constants.groupLength + 1;
-        else len = Constants.groupLength + 2;
+        else 
+            len = Constants.groupLength + 2;
+        
         final int height = Constants.M;
 
         for (final IntWritable value : values) {
@@ -37,6 +41,7 @@ public class Reducer1 extends
             if ((p > height) && (memory.size() > 0)
                     && memory.contains(p - height)) // left
                 set.union(p, p - height);
+            
             if ((p % len != 0) && (memory.size() > 0)
                     && (memory.get(memory.size() - 1) == p - 1)) // bottom
                 set.union(p, p - 1);
