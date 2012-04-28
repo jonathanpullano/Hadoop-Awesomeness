@@ -30,10 +30,8 @@ public class Map2 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
             final int p = Integer.parseInt(word_p.toString());
             final int q = Integer.parseInt(word_q.toString());
 
-            if (MatrixUtilities.isBoundary(p) != 0) {
+            if (MatrixUtilities.isBoundary(p) != 0)
                 context.write(new IntWritable(p), new IntWritable(q));
-                context.write(new IntWritable(p), new IntWritable(q));
-            }
         }
     }
 

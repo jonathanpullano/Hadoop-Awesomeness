@@ -20,13 +20,11 @@ public class Reducer2 extends
 
         DisjointSet set = new DisjointSet((2 * Constants.g - 2) * Constants.M);
 
-        int lastQ = 0;
-
-        for (final IntWritable q : qs) {
+        for (final IntWritable q : qs)
             set.union(key.get(), q.get());
-            lastQ = q.get();
-        }
 
-        context.write(key, new IntWritable(set.find(lastQ)));
+        int foundQ = set.find(key.get());
+        context.write(key, new IntWritable(foundQ));
+        context.write(key, new IntWritable(foundQ));
     }
 }
