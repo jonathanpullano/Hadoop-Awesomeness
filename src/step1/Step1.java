@@ -10,6 +10,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 import test.Util;
+import constants.Constants;
 
 public class Step1 {
 
@@ -31,8 +32,8 @@ public class Step1 {
         job.setOutputFormatClass(TextOutputFormat.class);
 
         FileInputFormat.addInputPath(job, new Path(inputPath));
-        Util.deleteDir("data/output/");
-        FileOutputFormat.setOutputPath(job, new Path("data/output/"));
+        Util.deleteDir(Constants.outputDir);
+        FileOutputFormat.setOutputPath(job, new Path(Constants.outputDir));
 
         job.waitForCompletion(true);
     }

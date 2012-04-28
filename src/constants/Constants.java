@@ -22,4 +22,6 @@ public class Constants {
     public static float desiredDensity = 0.59f;
     public static float wMin = 0.4f * fromNetID;
     public static float wLimit = wMin + desiredDensity;
+
+    public static final String outputDir = "data/output/";
 }
