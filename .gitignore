@@ -1,7 +1,6 @@
 bin/*
 lib/*
-data/
 .classpath
 .classpath*
-/data/*
 *.orig
+data/output
