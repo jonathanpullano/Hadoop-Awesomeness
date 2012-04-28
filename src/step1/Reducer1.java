@@ -12,6 +12,11 @@ import constants.Constants;
 
 public class Reducer1 extends
         Reducer<IntWritable, IntWritable, IntWritable, Tuple> {
+    
+    DisjointSet set = new DisjointSet(Constants.groupSize);
+    ArrayList<Integer> memory = new ArrayList<Integer>();
+    final int height = Constants.M;
+    
     @Override
     /**
      * At the moment, this does nothing but emit what it's given
@@ -22,20 +27,15 @@ public class Reducer1 extends
             final Reducer<IntWritable, IntWritable, IntWritable, Tuple>.Context context)
             throws IOException, InterruptedException {
         
-        final DisjointSet set = new DisjointSet(Constants.groupSize);
-        final ArrayList<Integer> memory = new ArrayList<Integer>();
+            int len;
+            int group = values.iterator().next().get();
+            if ((group == 0) || (group == Constants.g - 1))
+                len = Constants.groupLength + 1;
+            else 
+                len = Constants.groupLength + 2;
         
-        int len;
-        if ((key.get() == 0) || (key.get() == Constants.g - 1))
-            len = Constants.groupLength + 1;
-        else 
-            len = Constants.groupLength + 2;
-        
-        final int height = Constants.M;
-
-        for (final IntWritable value : values) {
-            final int p = value.get();
-            while ((memory.size() > 0) && (p - memory.get(0) < height))
+            final int p = key.get();
+            while ((memory.size() > 0) && (p - memory.get(0) > height))
                 memory.remove(0);
 
             if ((p > height) && (memory.size() > 0)
@@ -46,8 +46,7 @@ public class Reducer1 extends
                     && (memory.get(memory.size() - 1) == p - 1)) // bottom
                 set.union(p, p - 1);
 
-            context.write(key, new Tuple(p, set.find(p)));
+            context.write(new IntWritable(p), new Tuple(group, set.find(p)));
             memory.add(p);
-        }
     }
 }
