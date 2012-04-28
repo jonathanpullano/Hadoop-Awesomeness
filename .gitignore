@@ -1,11 +1,7 @@
 bin/*
 lib/*
-<<<<<<< HEAD
 data/
 .classpath
-=======
 .classpath*
 /data/*
 *.orig
-
->>>>>>> 0d8a5f2d29c1edb6cf2aad1dd5bb8777e527cca0
