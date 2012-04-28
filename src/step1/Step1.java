@@ -39,6 +39,6 @@ public class Step1 {
 
     public static void main(final String[] args) throws Exception {
         final Step1 step = new Step1();
-        step.run("data/step1/test1.txt");
+        step.run("data/step1/production_10000.txt");
     }
 }
