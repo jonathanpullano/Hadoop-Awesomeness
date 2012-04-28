@@ -32,8 +32,7 @@ public class Step1 {
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
-        FileInputFormat
-                .addInputPath(job, new Path(inputPath));
+        FileInputFormat.addInputPath(job, new Path(inputPath));
         Util.deleteDir("data/output/");
         FileOutputFormat.setOutputPath(job, new Path("data/output/"));
 
@@ -42,6 +41,6 @@ public class Step1 {
     
     public static void main(final String[] args) throws Exception {
         Step1 step = new Step1();
-        step.run("data/step1/test1.txt");
+        step.run("data/step1/production_10000.txt");
     }
 }
