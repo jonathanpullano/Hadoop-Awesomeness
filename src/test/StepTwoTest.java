@@ -16,4 +16,11 @@ public class StepTwoTest {
                 "data/step2/ans1.txt"));
     }
 
+    @Test
+    public void testTwoCase2() throws Exception {
+        step2.run("data/step2/test2.txt");
+        assertTrue(Util.checkOutput("data/output/part-r-00000",
+                "data/step2/ans2.txt"));
+    }
+
 }
