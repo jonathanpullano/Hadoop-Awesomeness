@@ -9,16 +9,17 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import structures.MatrixUtilities;
+import structures.Tuple;
 
 import constants.Constants;
 
 /**
  * 
  * @author chris d Reads in float values. Checks whether each value is in range.
- *         If it is, it assigns it a int representing its position (p) which is the key and a
+ *         If it is, it assigns it a int representing its position (p) and a
  *         column group (G).
  */
-public class Map1 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
+public class Map1a extends Mapper<LongWritable, Text, Tuple, IntWritable> {
     private final Text word = new Text();
 
     @Override
@@ -68,13 +69,13 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
                         (col * Constants.M) + (row + 1));
 
                 // d. write out (G,p)
-                context.write(position, column_group);
+                context.write(new Tuple(column_group.get(), position.get()), new IntWritable(1));
 
                 // e. if N is on a group boundary, you must also add it to its
                 // neighboring group
                 final int boundary = MatrixUtilities.isBoundary(position.get());
                 if (boundary != 0)
-                    context.write(position, new IntWritable(col_group_int + boundary));
+                    context.write(new Tuple(col_group_int + boundary, position.get()), new IntWritable(1));
             }
         }
     }
