@@ -7,7 +7,7 @@ public class GroupPartitioner extends Partitioner<IntWritable, IntWritable> {
 
     @Override
     public int getPartition(IntWritable key, IntWritable value, int numGroups) {
-        return value.get();
+        return value.get() % numGroups;
     }
 
 }
