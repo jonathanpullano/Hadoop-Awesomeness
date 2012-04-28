@@ -26,7 +26,11 @@ public class MatrixUtilities {
      * @return
      */
     public static int getColumnGroup(final int M, final int G, final int column) {
-        int column_group = column / (M / G);
+        if (column<0)
+        	return 0;
+        if (column>=M)
+        	return M-1;
+    	int column_group = column / (M / G);
         if (column_group == G) column_group--;
         return column_group;
     }

@@ -151,6 +151,7 @@ public class MatrixGenerator {
          * System.out.print(((matrix3[col][row]))+ " "); System.out.println("");
          * }
          */
+        /*
         System.out.println("");
         System.out.println("Columns:");
         for (int row = M - 1; row > -1; row--) {
@@ -160,19 +161,21 @@ public class MatrixGenerator {
             }
             System.out.println("");
         }
-
+		*/
         System.out.println("");
         System.out.println("Border Columns:");
         for (int row = M - 1; row > -1; row--) {
             for (int col = 0; col < M; col++) {
                 final int p = matrix2[col][row];
-                final int c = getCol(M, p);
+                final int c = MatrixUtilities.getColumn(M, p);
                 int out;
-                final int column_group = getColGroup(M, G, c);
+                int next = MatrixUtilities.getColumnGroup(M, G, c + 1);
+                int last = MatrixUtilities.getColumnGroup(M, G, c - 1);                
+                final int column_group = MatrixUtilities.getColumnGroup(M, G, c);
                 if ((c == 0) || (c == M - 1))
                     out = 0;
-                else if ((column_group != getColGroup(M, G, c + 1))
-                        || (column_group != getColGroup(M, G, c - 1)))
+                else if ((column_group != last)
+                        || (column_group != next))
                     out = 1;
                 else out = 0;
                 System.out.print(out + " ");
@@ -181,15 +184,7 @@ public class MatrixGenerator {
         }
     }
 
-    public static int getCol(final int M, final int p) {
-        return (p - 1) / M;
-    }
 
-    public static int getColGroup(final int M, final int G, final int col) {
-        int column_group = col / (M / G);
-        if (column_group == G) column_group--;
-        return column_group;
-    }
 
     public static void main(final String[] args) throws IOException {
         /*
