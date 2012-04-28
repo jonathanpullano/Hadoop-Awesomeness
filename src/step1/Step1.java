@@ -24,7 +24,7 @@ public class Step1 {
         job.setMapperClass(Map1.class);
         //job.setReducerClass(Reducer1.class);
 
-        job.setSortComparatorClass(IntComparator.class);
+        //job.setSortComparatorClass(IntComparator.class);
         
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
