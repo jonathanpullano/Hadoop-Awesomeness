@@ -15,6 +15,6 @@ public class Constants {
     // compute filter parameters for netid ak883
     public static float fromNetID = 0.388f;
     public static float desiredDensity = 0.59f;
-    public static float wMin = 0; //0.4f * fromNetID;
-    public static float wLimit = 1;//wMin + desiredDensity;
+    public static float wMin = .75f;//0.4f * fromNetID;
+    public static float wLimit = 1.25f;//wMin + desiredDensity;
 }
