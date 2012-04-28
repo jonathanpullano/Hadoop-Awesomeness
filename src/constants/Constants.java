@@ -2,7 +2,6 @@ package constants;
 
 public class Constants {
 
-    // The production file has 400,000,000 lines, which will fit in an int
     public final static int N = 16; // Total size of the file (probably should be
                               // read)
     public final static int M = (int) Math.sqrt(N);
