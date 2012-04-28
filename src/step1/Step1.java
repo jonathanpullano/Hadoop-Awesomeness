@@ -12,8 +12,8 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import test.Util;
 
 public class Step1 {
-    
-    public void run(String inputPath) throws Exception {
+
+    public void run(final String inputPath) throws Exception {
         final Configuration conf = new Configuration();
 
         final Job job = new Job(conf, "Step1");
@@ -24,11 +24,9 @@ public class Step1 {
 
         job.setMapperClass(Map1.class);
         job.setReducerClass(Reducer1.class);
-        //job.setReducerClass(TestReducer.class);
-        
+
         job.setPartitionerClass(GroupPartitioner.class);
-        //job.setSortComparatorClass(IntComparator.class);
-        
+
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
@@ -38,9 +36,9 @@ public class Step1 {
 
         job.waitForCompletion(true);
     }
-    
+
     public static void main(final String[] args) throws Exception {
-        Step1 step = new Step1();
+        final Step1 step = new Step1();
         step.run("data/step1/production_10000.txt");
     }
 }

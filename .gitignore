@@ -2,7 +2,6 @@ bin/*
 lib/*
 .classpath
 .classpath*
-/data/*
 *.orig
 data/output
 .gitignore~
