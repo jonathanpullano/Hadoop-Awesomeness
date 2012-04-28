@@ -23,8 +23,8 @@ public class Map2 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 
         while (tokenizer.hasMoreTokens()) {
             // 1. get G, p and Q
-            word_G.set(tokenizer.nextToken()); // not used
             word_p.set(tokenizer.nextToken());
+            word_G.set(tokenizer.nextToken()); // not used
             word_q.set(tokenizer.nextToken());
 
             final int p = Integer.parseInt(word_p.toString());
