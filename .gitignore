@@ -5,3 +5,4 @@ lib/*
 /data/*
 *.orig
 data/output
+.gitignore~
