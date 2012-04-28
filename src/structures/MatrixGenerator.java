@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.util.Scanner;
 
+import constants.Constants;
+
 public class MatrixGenerator {
 
     // compute filter parameters for netid ak883
@@ -89,16 +91,16 @@ public class MatrixGenerator {
         return value;
     }
 
-    private static void newTest(final int M, final int G) {
-        final int[][] matrix1 = new int[M][M]; // this is the order that the
+    private static void newTest() {
+        final int[][] matrix1 = new int[Constants.M][Constants.M]; // this is the order that the
                                                // values are added
-        final int[][] matrix2 = new int[M][M]; // this is the new value of the
+        final int[][] matrix2 = new int[Constants.M][Constants.M]; // this is the new value of the
                                                // vertices
-        final String[][] matrix3 = new String[M][M];
+        final String[][] matrix3 = new String[Constants.M][Constants.M];
 
-        final int div = M / G;
+        final int div = Constants.M / Constants.g;
 
-        for (int i = 1; i < M * M + 1; i++) {
+        for (int i = 1; i < Constants.M * Constants.M + 1; i++) {
             final int sq = (int) Math.sqrt(i);
             final int diff = i - sq * sq;
             int col, row;
@@ -117,19 +119,19 @@ public class MatrixGenerator {
                 row = sq;
             }
 
-            final int column_group = Math.min(col / div, G - 1);
+            final int column_group = Math.min(col / div, Constants.g - 1);
             String group = "" + column_group;
 
-            final int prev_group = Math.min((col - 1) / div, G - 1);
+            final int prev_group = Math.min((col - 1) / div, Constants.g - 1);
             if ((col > 0) && (prev_group != column_group))
                 group = prev_group + "," + group;
 
-            final int next_group = Math.min((col + 1) / div, G - 1);
-            if ((col < M) && (next_group != column_group))
+            final int next_group = Math.min((col + 1) / div, Constants.g - 1);
+            if ((col < Constants.M) && (next_group != column_group))
                 group = group + "," + next_group;
 
             matrix1[col][row] = i;
-            matrix2[col][row] = (col * M) + (row + 1);
+            matrix2[col][row] = (col * Constants.M) + (row + 1);
             matrix3[col][row] = group;
         }
         /*
@@ -151,33 +153,39 @@ public class MatrixGenerator {
          * System.out.print(((matrix3[col][row]))+ " "); System.out.println("");
          * }
          */
-        /*
+        
         System.out.println("");
         System.out.println("Columns:");
-        for (int row = M - 1; row > -1; row--) {
-            for (int col = 0; col < M; col++) {
-                final int c = getCol(M, matrix2[col][row]);
+        for (int row = Constants.M - 1; row > -1; row--) {
+            for (int col = 0; col < Constants.M; col++) {
+                final int c = MatrixUtilities.getColumn(Constants.M, matrix2[col][row]);
                 System.out.print(c + " ");
             }
             System.out.println("");
         }
-		*/
+		
         System.out.println("");
         System.out.println("Border Columns:");
-        for (int row = M - 1; row > -1; row--) {
-            for (int col = 0; col < M; col++) {
+        for (int row = Constants.M - 1; row > -1; row--) {
+            for (int col = 0; col < Constants.M; col++) {
                 final int p = matrix2[col][row];
-                final int c = MatrixUtilities.getColumn(M, p);
+                final int c = MatrixUtilities.getColumn(Constants.M, p);
                 int out;
-                int next = MatrixUtilities.getColumnGroup(M, G, c + 1);
-                int last = MatrixUtilities.getColumnGroup(M, G, c - 1);                
-                final int column_group = MatrixUtilities.getColumnGroup(M, G, c);
+                int next = MatrixUtilities.getColumnGroup(Constants.M, Constants.g, c + 1);
+                int last = MatrixUtilities.getColumnGroup(Constants.M, Constants.g, c - 1);                
+                final int column_group = MatrixUtilities.getColumnGroup(Constants.M, Constants.g, c);
+                /*
                 if ((c == 0) || (c == M - 1))
                     out = 0;
                 else if ((column_group != last)
                         || (column_group != next))
                     out = 1;
                 else out = 0;
+                */
+                if (MatrixUtilities.isBoundary(p)!=0)
+                	out = 1;
+                else 
+                	out = 0;
                 System.out.print(out + " ");
             }
             System.out.println("");
@@ -191,6 +199,6 @@ public class MatrixGenerator {
          * System.out.println("Min: " + wMin); System.out.println("Min: " +
          * wLimit); mg.buildMatrix(); mg.printMatrix(); mg.printPositions();
          */
-        newTest(3, 3);
+        newTest();
     }
 }

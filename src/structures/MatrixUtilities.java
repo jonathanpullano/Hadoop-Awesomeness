@@ -28,10 +28,8 @@ public class MatrixUtilities {
     public static int getColumnGroup(final int M, final int G, final int column) {
         if (column<0)
         	return 0;
-        if (column>=M)
-        	return M-1;
     	int column_group = column / (M / G);
-        if (column_group == G) column_group--;
+        if (column_group >= G) column_group = G-1;
         return column_group;
     }
 
@@ -41,12 +39,14 @@ public class MatrixUtilities {
         final int col = MatrixUtilities.getColumn(M, position);
 
         // first or last columns cannot be boundaries
-        if ((col == 0) || (col == M - 1)) return 0;
+        //if ((col == 0) || (col == M - 1)) return 0;
 
         // get the col group for this position
         final int column_group = getColumnGroup(M, g, col);
 
-        if (column_group != getColumnGroup(M, g, col - 1)) return -1;
+        if (column_group != getColumnGroup(M, g, col - 1)) 
+        	return -1;
+        
         if (column_group != getColumnGroup(M, g, col + 1))
             return 1;
         else return 0;
