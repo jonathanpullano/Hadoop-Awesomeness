@@ -24,6 +24,7 @@ public class Reducer2 extends
             set.union(key.get(), q.get());
 
         int foundQ = set.find(key.get());
+
         context.write(key, new IntWritable(foundQ));
         context.write(key, new IntWritable(foundQ));
     }

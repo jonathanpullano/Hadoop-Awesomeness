@@ -12,7 +12,7 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import test.Util;
 
 public class Step2 {
-    public static void main(final String[] args) throws Exception {
+    public void run(final String inputFile) throws Exception {
         final Configuration conf = new Configuration();
 
         final Job job = new Job(conf, "Step2");
@@ -27,10 +27,15 @@ public class Step2 {
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
-        FileInputFormat.addInputPath(job, new Path("data/step2/input.txt"));
+        FileInputFormat.addInputPath(job, new Path(inputFile));
         Util.deleteDir("data/output");
         FileOutputFormat.setOutputPath(job, new Path("data/output/"));
 
         job.waitForCompletion(true);
+    }
+
+    public static void main(final String[] args) throws Exception {
+        final Step2 step = new Step2();
+        step.run("data/step2/input.txt");
     }
 }
