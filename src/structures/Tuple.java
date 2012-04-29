@@ -7,36 +7,36 @@ import java.io.IOException;
 import org.apache.hadoop.io.WritableComparable;
 
 public class Tuple implements WritableComparable<Tuple> {
-    private int p;
-    private int q;
+    private int first;
+    private int second;
 
     public Tuple() {
     };
 
     public Tuple(final int p, final int q) {
-        this.p = p;
-        this.q = q;
+        first = p;
+        second = q;
     }
 
     public Tuple(final Tuple t) {
-        this.p = t.p;
-        this.q = t.q;
+        first = t.first;
+        second = t.second;
     }
 
-    public int getP() {
-        return p;
+    public int getFirst() {
+        return first;
     }
 
-    public void setP(final int p) {
-        this.p = p;
+    public void setFirst(final int p) {
+        first = p;
     }
 
-    public void setQ(final int q) {
-        this.q = q;
+    public void setSecond(final int q) {
+        second = q;
     }
 
-    public int getQ() {
-        return q;
+    public int getSecond() {
+        return second;
     }
 
     @Override
@@ -45,25 +45,25 @@ public class Tuple implements WritableComparable<Tuple> {
      */
     public int compareTo(final Tuple that) {
         if (this == that) return 0;
-        final int pDiff = this.p - that.p;
-        if (pDiff == 0) return this.q - that.q;
+        final int pDiff = first - that.first;
+        if (pDiff == 0) return second - that.second;
         return pDiff;
     }
 
     @Override
     public void readFields(final DataInput in) throws IOException {
-        p = in.readInt();
-        q = in.readInt();
+        first = in.readInt();
+        second = in.readInt();
     }
 
     @Override
     public String toString() {
-        return Integer.toString(p) + " " + Integer.toString(q);
+        return Integer.toString(first) + " " + Integer.toString(second);
     }
 
     @Override
     public void write(final DataOutput out) throws IOException {
-        out.writeInt(p);
-        out.writeInt(q);
+        out.writeInt(first);
+        out.writeInt(second);
     }
 }

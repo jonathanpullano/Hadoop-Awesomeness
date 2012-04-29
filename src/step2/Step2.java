@@ -29,10 +29,13 @@ public class Step2 {
         job.setOutputFormatClass(TextOutputFormat.class);
 
         FileInputFormat.addInputPath(job, new Path(inputFile));
+
         Util.deleteDir(Constants.outputDir);
         FileOutputFormat.setOutputPath(job, new Path(Constants.outputDir));
 
         job.waitForCompletion(true);
+
+        Util.copyFile(Constants.outputFile, Constants.reducer2CpyPath);
     }
 
     public static void main(final String[] args) throws Exception {

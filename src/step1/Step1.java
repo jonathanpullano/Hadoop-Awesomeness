@@ -36,6 +36,8 @@ public class Step1 {
         FileOutputFormat.setOutputPath(job, new Path(Constants.outputDir));
 
         job.waitForCompletion(true);
+
+        Util.copyFile(Constants.outputFile, Constants.reducer1CpyPath);
     }
 
     public static void main(final String[] args) throws Exception {
