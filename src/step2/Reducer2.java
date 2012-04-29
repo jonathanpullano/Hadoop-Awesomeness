@@ -27,14 +27,16 @@ public class Reducer2 extends
         Iterator<Tuple> iter = tuples.iterator();
         while(iter.hasNext()) {
             Tuple t1 = new Tuple(iter.next());
-            Tuple t2 = new Tuple(iter.next());
             set.union(t1.getFirst(), t1.getSecond());
-            set.union(t2.getFirst(), t2.getSecond());
+            if(iter.hasNext()) {
+                Tuple t2 = new Tuple(iter.next());
+                set.union(t2.getFirst(), t2.getSecond());
+            }
             inputList.add(t1);
         }
 
         int group = key.get();
-        if(group == Constants.numGroups - 2) {//FIXME!
+        if(group == Constants.numGroups - 2) { //FIXME!
             for(Tuple tup : inputList)
                 context.write(new IntWritable(tup.getFirst()), new IntWritable(set.find(tup.getFirst())));
         }
