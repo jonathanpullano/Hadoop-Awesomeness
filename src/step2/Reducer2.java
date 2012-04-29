@@ -14,7 +14,7 @@ import constants.Constants;
 public class Reducer2 extends
         Reducer<IntWritable, Tuple, IntWritable, IntWritable> {
 
-    DisjointSet set = new DisjointSet((2 * Constants.g - 2) * Constants.M);
+    DisjointSet set = new DisjointSet(2 * Constants.numGroups * Constants.M);
     ArrayList<Tuple> inputList = new ArrayList<Tuple>();
     
     @Override
@@ -35,10 +35,7 @@ public class Reducer2 extends
             inputList.add(t1);
         }
 
-        int group = key.get();
-        if(group == Constants.numGroups - 2) { //FIXME!
-            for(Tuple tup : inputList)
-                context.write(new IntWritable(tup.getFirst()), new IntWritable(set.find(tup.getFirst())));
-        }
+        for(Tuple tup : inputList)
+            context.write(new IntWritable(tup.getFirst()), new IntWritable(set.find(tup.getFirst())));
     }
 }
