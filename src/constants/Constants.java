@@ -2,7 +2,7 @@ package constants;
 
 public class Constants {
     // Total size of the file (probably should be read)
-    public final static int N = 16; // <- step 2
+    public static int N = 16; // <- step 2
     // public final static int N = 9; // <- step 1
 
     public static int M = (int) Math.sqrt(N);
