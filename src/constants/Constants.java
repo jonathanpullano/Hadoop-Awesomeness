@@ -1,10 +1,10 @@
 package constants;
 
 public class Constants {
+    // Total size of the file (probably should be read)
+    public static int N = 16; // <- step 2
+    // public final static int N = 9; // <- step 1
 
-    // The production file has 400,000,000 lines, which will fit in an int
-    public static int N = 16; // Total size of the file (probably should be
-                              // read)
     public static int M = (int) Math.sqrt(N);
     public static int g = 2; // Number of Column Groups
     public static int groupLength = M / g; // Length of a ColumnGroup (not
@@ -17,4 +17,10 @@ public class Constants {
     public static float desiredDensity = 0.59f;
     public static float wMin = 0.4f * fromNetID;
     public static float wLimit = wMin + desiredDensity;
+
+    public final static boolean DEBUG = true;
+
+    public static final String reducer1OutputDir = "data/output/reducer1/";
+    public static final String reducer2OutputDir = "data/output/reducer2/";
+    public static final String reducer3OutputDir = "data/output/reducer3/";
 }

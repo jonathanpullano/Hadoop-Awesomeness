@@ -3,13 +3,21 @@ package test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Scanner;
 
 public class Util {
 
     public static boolean deleteDir(final String path) {
-        final File file = new File(path);
-        return deleteDir(file);
+        return deleteDir(new File(path));
+    }
+
+    public static boolean copyFile(final String from, final String to)
+            throws IOException {
+        return copyFile(new File(from), new File(to));
     }
 
     // Deletes all files and subdirectories under dir.
@@ -24,9 +32,30 @@ public class Util {
                 if (!success) return false;
             }
         }
-
         // The directory is now empty so delete it
         return dir.delete();
+    }
+
+    public static boolean copyFile(final File fromFile, final File toFile)
+            throws IOException {
+        if (!toFile.exists()) toFile.createNewFile();
+        InputStream in = null;
+        OutputStream out = null;
+
+        try {
+            in = new FileInputStream(fromFile);
+            out = new FileOutputStream(toFile);
+
+            // Transfer bytes from in to out
+            final byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0)
+                out.write(buf, 0, len);
+        } finally {
+            if (in != null) in.close();
+            if (out != null) out.close();
+        }
+        return true;
     }
 
     public static boolean checkOutput(final String file1, final String file2)
