@@ -64,8 +64,9 @@ public class MatrixGenerator {
 	public void printMatrix() {
 		System.out.println("Matrix size: " + size);
 		for (int row = 0; row < size; row++) {
-			for (int col = 0; col < size; col++)
+			for (int col = 0; col < size; col++) {
 				System.out.print(((matrix[col][row])) + " ");
+			}
 			System.out.println("");
 		}
 	}
@@ -76,7 +77,9 @@ public class MatrixGenerator {
 			for (int col = 0; col < size; col++) {
 				final int pos = (col * size) + (row + 1);
 				String space = "";
-				if (pos < 10) space = "0";
+				if (pos < 10) {
+					space = "0";
+				}
 				System.out.print(space + pos + " ");
 			}
 			System.out.println("");
@@ -85,31 +88,38 @@ public class MatrixGenerator {
 
 	private float nextFloat() {
 		float value = -1;
-		if (scanner.hasNext())
+		if (scanner.hasNext()) {
 			value = Float.parseFloat(scanner.next());
-		else scanner.close();
+		} else {
+			scanner.close();
+		}
 		return value;
 	}
 
 	private static void newTest() {
-		final int[][] matrix1 = new int[Constants.M][Constants.M]; // this is the order that the
+		final int[][] matrix1 = new int[Constants.M][Constants.M]; // this is
+																	// the order
+																	// that the
 		// values are added
-		final int[][] matrix2 = new int[Constants.M][Constants.M]; // this is the new value of the
+		final int[][] matrix2 = new int[Constants.M][Constants.M]; // this is
+																	// the new
+																	// value of
+																	// the
 		// vertices
 		final String[][] matrix3 = new String[Constants.M][Constants.M];
 
 		final int div = Constants.M / Constants.g;
 
-		for (int i = 1; i < Constants.M * Constants.M + 1; i++) {
+		for (int i = 1; i < ((Constants.M * Constants.M) + 1); i++) {
 			final int sq = (int) Math.sqrt(i);
-			final int diff = i - sq * sq;
+			final int diff = i - (sq * sq);
 			int col, row;
 			if (diff == 0) {
 				col = sq - 1;
 				row = sq - 1;
 			}
 
-			else if (diff % 2 == 0) {
+			else if ((diff % 2) == 0) {
 				col = sq;
 				row = (diff - 1) / 2;
 			}
@@ -119,26 +129,32 @@ public class MatrixGenerator {
 				row = sq;
 			}
 
-			final int column_group = MatrixUtilities.getColumnGroup(Constants.M, Constants.g, col);			
-			String group = "" + column_group;
+			final int column_group = MatrixUtilities.getColumnGroup(
+					Constants.M, Constants.g, col);
+			final String group = "" + column_group;
 
 			matrix1[col][row] = i;
 			matrix2[col][row] = (col * Constants.M) + (row + 1);
 			matrix3[col][row] = group;
 		}
 
-		System.out.println("Position at which i is added:"); for(int row =
-				Constants.M-1; row >-1; row--){ for(int col = 0; col < Constants.M; col++)
-					System.out.print(((matrix1[col][row]))+ " "); System.out.println("");
+		System.out.println("Position at which i is added:");
+		for (int row = Constants.M - 1; row > -1; row--) {
+			for (int col = 0; col < Constants.M; col++) {
+				System.out.print(((matrix1[col][row])) + " ");
+			}
+			System.out.println("");
 		}
 
-		/*
-		 * System.out.println("");
-		 * System.out.println("Value given to the vertex at each position:");
-		 * for(int row = M-1; row >-1; row--){ for(int col = 0; col < M; col++)
-		 * System.out.print(((matrix2[col][row]))+ " "); System.out.println("");
-		 * }
-		 */
+		System.out.println("");
+		System.out.println("Value given to the vertex at each position:");
+		for (int row = Constants.M - 1; row > -1; row--) {
+			for (int col = 0; col < Constants.M; col++) {
+				System.out.print(((matrix2[col][row])) + " ");
+			}
+			System.out.println("");
+		}
+
 		/*
 		 * System.out.println(""); System.out.println("Col:"); for(int row =
 		 * M-1; row >-1; row--){ for(int col = 0; col < M; col++)
@@ -150,7 +166,8 @@ public class MatrixGenerator {
 		System.out.println("Columns:");
 		for (int row = Constants.M - 1; row > -1; row--) {
 			for (int col = 0; col < Constants.M; col++) {
-				final int c = MatrixUtilities.getColumn(Constants.M, matrix2[col][row]);
+				final int c = MatrixUtilities.getColumn(Constants.M,
+						matrix2[col][row]);
 				System.out.print(c + " ");
 			}
 			System.out.println("");
@@ -163,28 +180,38 @@ public class MatrixGenerator {
 				final int p = matrix2[col][row];
 				final int c = MatrixUtilities.getColumn(Constants.M, p);
 				int out;
-				if (MatrixUtilities.isBoundary(p))
+				if (MatrixUtilities.isBoundary(p)) {
 					out = 1;
-				else 
+				} else {
 					out = 0;
+				}
 				System.out.print(out + " ");
 			}
 			System.out.println("");
 		}
-		
+
 		System.out.println("");
 		System.out.println("Column Groups:");
 		for (int row = Constants.M - 1; row > -1; row--) {
 			for (int col = 0; col < Constants.M; col++) {
-				final int column = MatrixUtilities.getColumn(Constants.M, matrix2[col][row]);
-				final int c = MatrixUtilities.getColumnGroup(Constants.M, Constants.g, column);
+				final int column = MatrixUtilities.getColumn(Constants.M,
+						matrix2[col][row]);
+				final int c = MatrixUtilities.getColumnGroup(Constants.M,
+						Constants.g, column);
 				System.out.print(c + " ");
 			}
 			System.out.println("");
 		}
+
+		final int num_of_groups = (Constants.M / Constants.g);
+		System.out.println("\nnumber of groups: " + num_of_groups);
+		for (int i = 0; i < num_of_groups; i++) {
+			final int min = MatrixUtilities.minInGroup(i);
+			final int max = MatrixUtilities.maxInGroup(i);
+			System.out.println("Group: " + i + "    min: " + min + "     max: "
+					+ max);
+		}
 	}
-
-
 
 	public static void main(final String[] args) throws IOException {
 		/*
