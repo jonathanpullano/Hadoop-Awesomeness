@@ -55,7 +55,8 @@ public class MatrixUtilities {
 
 		max = Constants.M * Constants.g * (column_group + 1);
 
-		// If the passed group is not the last group add M to the output
+		// If the passed group is not the last group add the number of
+		// groups minus 1 to the output
 		if (column_group != (num_of_groups - 1)) {
 			max += Constants.M;
 		}
