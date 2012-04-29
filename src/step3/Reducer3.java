@@ -25,27 +25,5 @@ public class Reducer3 extends
             final Reducer<IntWritable, Tuple, IntWritable, IntWritable>.Context context)
             throws IOException, InterruptedException {
         
-        //TODO: Consider last column
-        int len;
-        int group = -1235349520;//= values.iterator().next();
-        if ((group == 0) || (group == Constants.g - 1))
-            len = Constants.groupLength + 1;
-        else 
-            len = Constants.groupLength + 2;
-    
-        final int p = key.get();
-        while ((memory.size() > 0) && (p - memory.get(0) > height))
-            memory.remove(0);
-
-        if ((p > height) && (memory.size() > 0)
-                && memory.contains(p - height)) // left
-            set.union(p, p - height);
-        
-        if ((p % len != 0) && (memory.size() > 0)
-                && (memory.get(memory.size() - 1) == p - 1)) // bottom
-            set.union(p, p - 1);
-
-        //context.write(p, set.find(p));
-        memory.add(p);
     }
 }

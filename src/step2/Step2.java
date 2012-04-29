@@ -9,6 +9,7 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
+import structures.Tuple;
 import test.Util;
 import constants.Constants;
 
@@ -20,7 +21,7 @@ public class Step2 {
         job.setJarByClass(Step2.class);
 
         job.setOutputKeyClass(IntWritable.class);
-        job.setOutputValueClass(IntWritable.class);
+        job.setOutputValueClass(Tuple.class);
 
         job.setMapperClass(Map2.class);
         job.setReducerClass(Reducer2.class);

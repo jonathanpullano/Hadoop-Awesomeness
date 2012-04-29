@@ -15,8 +15,10 @@ public class StepTwoTest {
         Constants.N = 16;
         Constants.M = (int) Math.sqrt(Constants.N);
         Constants.g = 2;
-        Constants.groupLength = Constants.M / Constants.g;
-        Constants.groupSize = Constants.groupLength * Constants.M;
+        Constants.numGroups = Constants.M / Constants.g;
+        Constants.groupSize = Constants.M * (Constants.g+1);
+        Constants.wLimit = 1.25f;
+        Constants.wMin = .75f;
     }
 
     @Test

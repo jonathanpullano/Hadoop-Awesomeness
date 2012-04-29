@@ -9,8 +9,9 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import structures.MatrixUtilities;
+import structures.Tuple;
 
-public class Map2 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
+public class Map2 extends Mapper<LongWritable, Text, IntWritable, Tuple> {
     private final Text word_G = new Text();
     private final Text word_p = new Text();
     private final Text word_q = new Text();
@@ -23,15 +24,16 @@ public class Map2 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 
         while (tokenizer.hasMoreTokens()) {
             // 1. get G, p and Q
+            word_G.set(tokenizer.nextToken());
             word_p.set(tokenizer.nextToken());
-            word_G.set(tokenizer.nextToken()); // not used
             word_q.set(tokenizer.nextToken());
 
+            final int g = Integer.parseInt(word_G.toString());
             final int p = Integer.parseInt(word_p.toString());
             final int q = Integer.parseInt(word_q.toString());
-
+            
             if (MatrixUtilities.isBoundary(p))
-                context.write(new IntWritable(p), new IntWritable(q));
+                context.write(new IntWritable(g), new Tuple(p, q));
         }
     }
 }

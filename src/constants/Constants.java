@@ -6,11 +6,9 @@ public class Constants {
     // public final static int N = 9; // <- step 1
 
     public static int M = (int) Math.sqrt(N);
-    public static int g = 2; // Number of Column Groups
-    public static int groupLength = M / g; // Length of a ColumnGroup (not
-                                           // including boundaries)
-    public static int groupSize = groupLength * M; // Number of elements in a
-                                                   // column group
+    public static int g = 3; // Length of Group
+    public static int numGroups = M/g;
+    public static int groupSize = M * (g + 1);
 
     // compute filter parameters for netid ak883
     public static float fromNetID = 0.388f;
