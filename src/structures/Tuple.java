@@ -13,9 +13,9 @@ public class Tuple implements WritableComparable<Tuple> {
     public Tuple() {
     };
 
-    public Tuple(final int p, final int q) {
-        first = p;
-        second = q;
+    public Tuple(final int first, final int second) {
+        this.first = first;
+        this.second = second;
     }
 
     public Tuple(final Tuple t) {
@@ -27,12 +27,12 @@ public class Tuple implements WritableComparable<Tuple> {
         return first;
     }
 
-    public void setFirst(final int p) {
-        first = p;
+    public void setFirst(final int first) {
+        this.first = first;
     }
 
-    public void setSecond(final int q) {
-        second = q;
+    public void setSecond(final int second) {
+        this.second = second;
     }
 
     public int getSecond() {
