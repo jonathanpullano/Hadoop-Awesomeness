@@ -30,12 +30,11 @@ public class Step2 {
 
         FileInputFormat.addInputPath(job, new Path(inputFile));
 
-        Util.deleteDir(Constants.outputDir);
-        FileOutputFormat.setOutputPath(job, new Path(Constants.outputDir));
+        Util.deleteDir(Constants.reducer2OutputDir);
+        FileOutputFormat.setOutputPath(job, new Path(
+                Constants.reducer2OutputDir));
 
         job.waitForCompletion(true);
-
-        Util.copyFile(Constants.outputFile, Constants.reducer2CpyPath);
     }
 
     public static void main(final String[] args) throws Exception {

@@ -19,8 +19,8 @@ public class Constants {
     public static float wLimit = wMin + desiredDensity;
 
     public final static boolean DEBUG = true;
-    public static final String outputDir = "data/output/";
-    public static final String outputFile = outputDir + "part-r-00000";
-    public static final String reducer1CpyPath = "data/step3/input/reducer1Output.txt";
-    public static final String reducer2CpyPath = "data/step3/input/reducer2Output.txt";
+
+    public static final String reducer1OutputDir = "data/output/reducer1/";
+    public static final String reducer2OutputDir = "data/output/reducer2/";
+    public static final String reducer3OutputDir = "data/output/reducer3/";
 }

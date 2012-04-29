@@ -32,11 +32,11 @@ public class Step1 {
         job.setOutputFormatClass(TextOutputFormat.class);
 
         FileInputFormat.addInputPath(job, new Path(inputPath));
-        Util.deleteDir(Constants.outputDir);
-        FileOutputFormat.setOutputPath(job, new Path(Constants.outputDir));
+
+        Util.deleteDir(Constants.reducer1OutputDir);
+        FileOutputFormat.setOutputPath(job, new Path(
+                Constants.reducer1OutputDir));
 
         job.waitForCompletion(true);
-
-        Util.copyFile(Constants.outputFile, Constants.reducer1CpyPath);
     }
 }
