@@ -14,7 +14,7 @@ public class StepOneTest {
         // This code is evil
         Constants.N = 9;
         Constants.M = (int) Math.sqrt(Constants.N);
-        Constants.g = 2;
+        Constants.g = 3;
         Constants.numGroups = Constants.M / Constants.g;
         Constants.groupSize = Constants.M * (Constants.g+1);
         Constants.wLimit = 1.25f;
