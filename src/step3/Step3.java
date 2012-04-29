@@ -15,6 +15,7 @@ import constants.Constants;
 
 public class Step3 {
     public void run(final String inputFile) throws Exception {
+
         final Configuration conf = new Configuration();
 
         final Job job = new Job(conf, "Step3");
