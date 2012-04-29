@@ -13,8 +13,9 @@ import constants.Constants;
 public class Reducer1 extends
         Reducer<IntWritable, IntWritable, IntWritable, Tuple> {
     
-    DisjointSet set = new DisjointSet(Constants.groupSize);
+    DisjointSet set;
     ArrayList<Integer> memory = new ArrayList<Integer>();
+    ArrayList<Integer> inputList = new ArrayList<Integer>();
     final int height = Constants.M;
     
     @Override
@@ -29,12 +30,16 @@ public class Reducer1 extends
         
             int len;
             int group = values.iterator().next().get();
+            final int p = key.get();
+            inputList.add(p);
+            if(p-1 % Constants.groupSize == 0) {
+                set = new DisjointSet(Constants.groupSize);
+            }
+
             if ((group == 0) || (group == Constants.g - 1))
                 len = Constants.groupLength + 1;
             else 
                 len = Constants.groupLength + 2;
-        
-            final int p = key.get();
             while ((memory.size() > 0) && (p - memory.get(0) > height))
                 memory.remove(0);
 
@@ -45,8 +50,15 @@ public class Reducer1 extends
             if ((p % len != 0) && (memory.size() > 0)
                     && (memory.get(memory.size() - 1) == p - 1)) // bottom
                 set.union(p, p - 1);
-
-            context.write(new IntWritable(p), new Tuple(group, set.find(p)));
+            
             memory.add(p);
+            
+            if(p - 1 % Constants.groupSize == Constants.groupSize - 1) {
+                memory.clear();
+                for(Integer value : inputList) {
+                    context.write(new IntWritable(value), new Tuple(group, set.find(value)));
+                }
+                inputList.clear();
+            }
     }
 }
