@@ -4,11 +4,24 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import constants.Constants;
+
 import step1.Step1;
 import constants.Constants;
 
 public class StepOneTest {
     Step1 stepOne = new Step1();
+    
+    public StepOneTest() {
+        //This code is evil
+        Constants.N = 9;
+        Constants.M = (int) Math.sqrt(Constants.N);
+        Constants.g = 1;
+        Constants.groupLength = Constants.M / Constants.g;
+        Constants.groupSize = Constants.groupLength * Constants.M;
+        Constants.wLimit = 1.25f;
+        Constants.wMin = .75f;
+    }
 
     @Test
     public void testAllConnected() throws Exception {

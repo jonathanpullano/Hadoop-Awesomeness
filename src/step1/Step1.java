@@ -39,9 +39,4 @@ public class Step1 {
 
         Util.copyFile(Constants.outputFile, Constants.reducer1CpyPath);
     }
-
-    public static void main(final String[] args) throws Exception {
-        final Step1 step = new Step1();
-        step.run("data/step1/production_10000.txt");
-    }
 }
