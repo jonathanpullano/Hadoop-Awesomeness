@@ -68,13 +68,13 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
                         (col * Constants.M) + (row + 1));
 
                 // d. write out (G,p)
-                context.write(position, column_group);
+                context.write(column_group, position);
 
                 // e. if N is on a group boundary, you must also add it to 
                 //    the group to its left.
                 final boolean is_boundary = MatrixUtilities.isBoundary(position.get());
                 if (is_boundary)
-                    context.write(position, new IntWritable(col_group_int - 1));
+                    context.write(new IntWritable(col_group_int - 1), position);
             }
         }
     }

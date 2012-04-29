@@ -36,7 +36,7 @@ public class Reducer3 extends
         
         int len;
         final int group = key.get();
-        if(group == Constants.g)
+        if(group == Constants.numGroups - 1)
             len = Constants.g;
         else 
             len = Constants.g + 1;
@@ -72,7 +72,7 @@ public class Reducer3 extends
         }
         
         //Pass 3 - Find and output
-        for(int p = minP; p < maxP; p++) {
+        for(int p = minP; p <= maxP; p++) {
             if(!pointMemory.contains(p))
                 continue;
             
