@@ -28,27 +28,18 @@ public class MatrixUtilities {
     public static int getColumnGroup(final int M, final int G, final int column) {
         if (column<0)
         	return 0;
-    	int column_group = column / (M / G);
-        if (column_group >= G) column_group = G-1;
+    	int column_group = column / G;
         return column_group;
     }
 
-    public static int isBoundary(final int position) {
+    public static boolean isBoundary(final int position) {
         final int M = Constants.M;
         final int g = Constants.g;
-        final int col = MatrixUtilities.getColumn(M, position);
+        final int column = MatrixUtilities.getColumn(M, position);
 
-        // first or last columns cannot be boundaries
-        //if ((col == 0) || (col == M - 1)) return 0;
-
-        // get the col group for this position
-        final int column_group = getColumnGroup(M, g, col);
-
-        if (column_group != getColumnGroup(M, g, col - 1)) 
-        	return -1;
-        
-        if (column_group != getColumnGroup(M, g, col + 1))
-            return 1;
-        else return 0;
+        if ( column!=0 && column%g==0)
+        	return true;
+        else 
+        	return false;
     }
 }

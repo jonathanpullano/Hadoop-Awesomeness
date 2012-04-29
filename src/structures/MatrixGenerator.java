@@ -119,16 +119,8 @@ public class MatrixGenerator {
 				row = sq;
 			}
 
-			final int column_group = Math.min(col / div, Constants.g - 1);
+			final int column_group = MatrixUtilities.getColumnGroup(Constants.M, Constants.g, col);			
 			String group = "" + column_group;
-
-			final int prev_group = Math.min((col - 1) / div, Constants.g - 1);
-			if ((col > 0) && (prev_group != column_group))
-				group = prev_group + "," + group;
-
-			final int next_group = Math.min((col + 1) / div, Constants.g - 1);
-			if ((col < Constants.M) && (next_group != column_group))
-				group = group + "," + next_group;
 
 			matrix1[col][row] = i;
 			matrix2[col][row] = (col * Constants.M) + (row + 1);
@@ -171,22 +163,22 @@ public class MatrixGenerator {
 				final int p = matrix2[col][row];
 				final int c = MatrixUtilities.getColumn(Constants.M, p);
 				int out;
-				int next = MatrixUtilities.getColumnGroup(Constants.M, Constants.g, c + 1);
-				int last = MatrixUtilities.getColumnGroup(Constants.M, Constants.g, c - 1);                
-				final int column_group = MatrixUtilities.getColumnGroup(Constants.M, Constants.g, c);
-				/*
-                if ((c == 0) || (c == M - 1))
-                    out = 0;
-                else if ((column_group != last)
-                        || (column_group != next))
-                    out = 1;
-                else out = 0;
-				 */
-				if (MatrixUtilities.isBoundary(p)!=0)
+				if (MatrixUtilities.isBoundary(p))
 					out = 1;
 				else 
 					out = 0;
 				System.out.print(out + " ");
+			}
+			System.out.println("");
+		}
+		
+		System.out.println("");
+		System.out.println("Column Groups:");
+		for (int row = Constants.M - 1; row > -1; row--) {
+			for (int col = 0; col < Constants.M; col++) {
+				final int column = MatrixUtilities.getColumn(Constants.M, matrix2[col][row]);
+				final int c = MatrixUtilities.getColumnGroup(Constants.M, Constants.g, column);
+				System.out.print(c + " ");
 			}
 			System.out.println("");
 		}

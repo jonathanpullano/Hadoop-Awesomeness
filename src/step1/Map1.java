@@ -59,7 +59,7 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
                 }
 
                 // c. Once you know where it should be placed, calculate
-                // its column_group (G) and its absolute position (p)
+                //    its column_group (G) and its absolute position (p)
                 final int col_group_int = MatrixUtilities.getColumnGroup(
                         Constants.M, Constants.g, col);
 
@@ -70,11 +70,11 @@ public class Map1 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
                 // d. write out (G,p)
                 context.write(position, column_group);
 
-                // e. if N is on a group boundary, you must also add it to its
-                // neighboring group
-                final int boundary = MatrixUtilities.isBoundary(position.get());
-                if (boundary != 0)
-                    context.write(position, new IntWritable(col_group_int + boundary));
+                // e. if N is on a group boundary, you must also add it to 
+                //    the group to its left.
+                final boolean is_boundary = MatrixUtilities.isBoundary(position.get());
+                if (is_boundary)
+                    context.write(position, new IntWritable(col_group_int - 1));
             }
         }
     }
