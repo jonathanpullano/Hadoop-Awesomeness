@@ -42,12 +42,9 @@ public class Reducer3 extends
             len = Constants.g + 1;
         
         //Pass 1 - Build a memory to "sort" the values
-        Iterator<Tuple> iter = values.iterator();
-        int prevP = iter.next().getFirst();
-        pointMemory.add(prevP);
         for(Tuple value : values) {
             int curP = value.getFirst();
-            if(curP == prevP)
+            if(value.getFirst() != value.getSecond())
                 boundaryMemory.put(value.getFirst(), value.getSecond());
             else
                 pointMemory.add(value.getFirst());
@@ -58,13 +55,13 @@ public class Reducer3 extends
 
         //Pass 2 - Unions
         for(int p = minP; p <= maxP; p++) {
-            if(!pointMemory.contains(p))
+            if(!pointMemory.contains(p) && !boundaryMemory.containsKey(p))
                 continue;
         
-            if ((p > height) && pointMemory.contains(p - height)) // left
+            if ((p > height) && pointMemory.contains(p - height) || boundaryMemory.containsKey(p - height)) // left
                 set.union(p, p - height);
             
-            if ((p % len != 1) && pointMemory.contains(p-1)) // bottom
+            if ((p % len != 1) && pointMemory.contains(p-1) || boundaryMemory.containsKey(p - 1)) // bottom
                 set.union(p, p - 1);
             
             if(boundaryMemory.containsKey(p))
@@ -73,7 +70,7 @@ public class Reducer3 extends
         
         //Pass 3 - Find and output
         for(int p = minP; p <= maxP; p++) {
-            if(!pointMemory.contains(p))
+            if(!pointMemory.contains(p) && !boundaryMemory.containsKey(p))
                 continue;
             
             context.write(new IntWritable(p), new IntWritable(set.find(p)));

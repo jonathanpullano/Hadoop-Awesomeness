@@ -22,7 +22,7 @@ public class StepThreeTest {
         Constants.DEBUG = true;
     }
     
-    @Test
+    //@Test
     public void testHalfMonty() throws Exception {
         Constants.reducer1OutputDir = "data/step3/input1";
         Constants.reducer2OutputDir = "data/step3/input2";

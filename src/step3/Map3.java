@@ -45,16 +45,18 @@ public class Map3 extends Mapper<LongWritable, Text, IntWritable, Tuple> {
         red1_p = Integer.parseInt(red1Word_p.toString());
         red1_q = Integer.parseInt(red1Word_q.toString());
         
-        /*if (MatrixUtilities.isBoundary(red1_p) 
+        if (MatrixUtilities.isBoundary(red1_p) 
                 && MatrixUtilities.getColumnGroup(Constants.M, Constants.g, 
-                   MatrixUtilities.getColumn(Constants.M, red1_p)) == red1_g) 
-            return;*/
+                   MatrixUtilities.getColumn(Constants.M, red1_p)) == red1_g + 1) 
+            return;
                 
-        context.write(new IntWritable(red1_g), new Tuple(red1_p, red1_p));
+        
         
         if(red1_p == red2_p) {
             context.write(new IntWritable(red1_g), new Tuple(red2_p, red2_q));
             readLine2();
+        } else {
+            context.write(new IntWritable(red1_g), new Tuple(red1_p, red1_p));
         }
     }
     
