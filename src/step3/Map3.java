@@ -17,15 +17,17 @@ import constants.Constants;
 
 public class Map3 extends Mapper<LongWritable, Text, IntWritable, Tuple> {
 
-    private final Text red2Word_p = new Text();
-    private final Text red2Word_q = new Text();
+    private final Text red1Word_g = new Text();
+    private final Text red1Word_p = new Text();
+    private final Text red1Word_q = new Text();
     // private static Queue<Tuple> queue = null;
-    private int p, g, q;
     Scanner scanner = null;
+    int red2_p, red2_q;
 
     private void init() throws FileNotFoundException {
         if (scanner != null) return;
-        scanner = new Scanner(new File("data/step3/input/red1Output.txt"));
+        scanner = new Scanner(new File(Constants.reducer2OutputDir + "/part-r-00000")); //TODO: Update to use output dir
+        readLine2();
     }
 
     @Override
@@ -34,30 +36,35 @@ public class Map3 extends Mapper<LongWritable, Text, IntWritable, Tuple> {
         init();
         final String line = value.toString();
         final StringTokenizer tokenizer = new StringTokenizer(line);
-        int red_p, red_q, red_g;
-        red2Word_p.set(tokenizer.nextToken());
-        red2Word_q.set(tokenizer.nextToken());
+        int red1_g, red1_p, red1_q;
+        red1Word_g.set(tokenizer.nextToken());
+        red1Word_p.set(tokenizer.nextToken());
+        red1Word_q.set(tokenizer.nextToken());
 
-        red_p = Integer.parseInt(red2Word_p.toString());
-        red_q = Integer.parseInt(red2Word_q.toString());
-        red_g = MatrixUtilities.getColumnGroup(Constants.M, Constants.g,
-                MatrixUtilities.getColumn(Constants.M, red_p));
-
-        while (scanner.hasNext()) {
-            p = scanner.nextInt();
-            g = scanner.nextInt();
-            q = scanner.nextInt(); // <- value never gets used...
-            context.write(new IntWritable(g), new Tuple(p, p));
-            if ((g >= red_g) && (p >= red_p)) break;
+        red1_g = Integer.parseInt(red1Word_g.toString());
+        red1_p = Integer.parseInt(red1Word_p.toString());
+        red1_q = Integer.parseInt(red1Word_q.toString());
+        
+        /*if (MatrixUtilities.isBoundary(red1_p) 
+                && MatrixUtilities.getColumnGroup(Constants.M, Constants.g, 
+                   MatrixUtilities.getColumn(Constants.M, red1_p)) == red1_g) 
+            return;*/
+                
+        context.write(new IntWritable(red1_g), new Tuple(red1_p, red1_p));
+        
+        if(red1_p == red2_p) {
+            context.write(new IntWritable(red1_g), new Tuple(red2_p, red2_q));
+            readLine2();
         }
-
-        context.write(new IntWritable(red_g), new Tuple(red_p, red_q));
-
-        while (scanner.hasNext()) {
-            p = scanner.nextInt();
-            g = scanner.nextInt();
-            q = scanner.nextInt(); // <- value never gets used...
-            context.write(new IntWritable(g), new Tuple(p, p));
+    }
+    
+    public void readLine2() {
+        if(scanner.hasNext()) {
+            red2_p = scanner.nextInt();
+            red2_q = scanner.nextInt();
+        } else {
+            red2_p = -1;
+            red2_q = -1;
         }
     }
 }

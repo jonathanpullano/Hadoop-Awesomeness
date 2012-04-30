@@ -7,6 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Util {
@@ -74,5 +77,24 @@ public class Util {
             System.out.println("File not found:" + filename);
         }
         return plaintext.toString();
+    }
+    
+    public static ArrayList<String> getReducerOutputs(final String reducerDirectory) {
+        File dir = new File(reducerDirectory);
+        if (dir.isDirectory()) {
+            ArrayList<String> children = new ArrayList<String>(Arrays.asList(dir.list()));
+            //Pattern pattern = Pattern.compile("part-r-[0-9]*");
+            
+            Iterator<String> iter = children.iterator();
+            while(iter.hasNext()) {
+                String tmp = iter.next();
+                
+                if(!tmp.startsWith("p"))
+                    iter.remove();
+            }
+            
+            System.out.println(children);
+            return children;
+        } else throw new RuntimeException("Not a reducer dir");
     }
 }

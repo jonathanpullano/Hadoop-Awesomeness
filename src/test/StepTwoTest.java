@@ -19,18 +19,21 @@ public class StepTwoTest {
         Constants.groupSize = Constants.M * (Constants.g+1);
         Constants.wLimit = 1.25f;
         Constants.wMin = .75f;
+        Constants.DEBUG = true;
     }
 
     @Test
     public void testTwoCase1() throws Exception {
-        step2.run("data/step2/test1.txt");
+        Constants.reducer1OutputDir = "data/step2/test1.txt";
+        step2.run();
         assertTrue(Util.checkOutput(Constants.reducer2OutputDir
                 + "part-r-00000", "data/step2/ans1.txt"));
     }
 
     @Test
     public void testTwoCase2() throws Exception {
-        step2.run("data/step2/test2.txt");
+        Constants.reducer1OutputDir = "data/step2/test2.txt";
+        step2.run();
         assertTrue(Util.checkOutput(Constants.reducer2OutputDir
                 + "part-r-00000", "data/step2/ans2.txt"));
     }

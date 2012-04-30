@@ -19,6 +19,7 @@ public class StepOneTest {
         Constants.groupSize = Constants.M * (Constants.g+1);
         Constants.wLimit = 1.25f;
         Constants.wMin = .75f;
+        Constants.DEBUG = true;
     }
 
     @Test
