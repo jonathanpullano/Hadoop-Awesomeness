@@ -42,12 +42,16 @@ public class Reducer3 extends
             len = Constants.g + 1;
         
         //Pass 1 - Build a memory to "sort" the values
-        for(Tuple value : values) {
-            int curP = value.getFirst();
-            if(value.getFirst() != value.getSecond())
-                boundaryMemory.put(value.getFirst(), value.getSecond());
+        Iterator<Tuple> iter = values.iterator();
+        int prevP = -1;
+        while(iter.hasNext()) {
+            Tuple curTup = iter.next();
+            int curP = curTup.getFirst();
+            if(curP == prevP)
+                boundaryMemory.put(curP, curTup.getSecond());
             else
-                pointMemory.add(value.getFirst());
+                pointMemory.add(curP);
+            prevP = curP;
         }
         
         int minP = MatrixUtilities.minInGroup(group);
@@ -61,12 +65,15 @@ public class Reducer3 extends
             if ((p > height) && pointMemory.contains(p - height) || boundaryMemory.containsKey(p - height)) // left
                 set.union(p, p - height);
             
-            if ((p % len != 1) && pointMemory.contains(p-1) || boundaryMemory.containsKey(p - 1)) // bottom
+            if ((p % height != 1) && pointMemory.contains(p - 1) || boundaryMemory.containsKey(p - 1)) // bottom
                 set.union(p, p - 1);
             
             if(boundaryMemory.containsKey(p))
                 set.union(p, boundaryMemory.get(p));
         }
+        
+        if(group != Constants.numGroups - 1)
+            maxP -= height;
         
         //Pass 3 - Find and output
         for(int p = minP; p <= maxP; p++) {

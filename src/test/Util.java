@@ -79,7 +79,7 @@ public class Util {
         return plaintext.toString();
     }
     
-    public static ArrayList<String> getReducerOutputs(final String reducerDirectory) {
+    public static ArrayList<String> getReducerOutputs(final String reducerDirectory, final String prefix) {
         File dir = new File(reducerDirectory);
         if (dir.isDirectory()) {
             ArrayList<String> children = new ArrayList<String>(Arrays.asList(dir.list()));
@@ -89,12 +89,16 @@ public class Util {
             while(iter.hasNext()) {
                 String tmp = iter.next();
                 
-                if(!tmp.startsWith("p"))
+                if(!tmp.startsWith(prefix))
                     iter.remove();
             }
             
             System.out.println(children);
             return children;
         } else throw new RuntimeException("Not a reducer dir");
+    }
+    
+    public static ArrayList<String> getReducerOutputs(final String reducerDirectory) {
+        return getReducerOutputs(reducerDirectory, "part-r-");
     }
 }

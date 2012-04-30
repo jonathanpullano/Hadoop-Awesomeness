@@ -29,7 +29,10 @@ public class Step2 {
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
-        FileInputFormat.addInputPath(job, new Path(Constants.reducer1OutputDir));
+        //TODO: Consider interleaving on reducer2
+        for(String filename : Util.getReducerOutputs(Constants.reducer1OutputDir, "test"))
+            FileInputFormat.addInputPath(job, new Path(Constants.reducer1OutputDir + "/" + filename));
+        //FileInputFormat.addInputPath(job, new Path(Constants.reducer1OutputDir));
 
         Util.deleteDir(Constants.reducer2OutputDir);
         FileOutputFormat.setOutputPath(job, new Path(
@@ -37,4 +40,6 @@ public class Step2 {
 
         job.waitForCompletion(true);
     }
+    
+    
 }

@@ -24,7 +24,7 @@ public class StepTwoTest {
 
     @Test
     public void testTwoCase1() throws Exception {
-        Constants.reducer1OutputDir = "data/step2/test1.txt";
+        Constants.reducer1OutputDir = "data/step2/test1";
         step2.run();
         assertTrue(Util.checkOutput(Constants.reducer2OutputDir
                 + "part-r-00000", "data/step2/ans1.txt"));
@@ -32,7 +32,7 @@ public class StepTwoTest {
 
     @Test
     public void testTwoCase2() throws Exception {
-        Constants.reducer1OutputDir = "data/step2/test2.txt";
+        Constants.reducer1OutputDir = "data/step2/test2";
         step2.run();
         assertTrue(Util.checkOutput(Constants.reducer2OutputDir
                 + "part-r-00000", "data/step2/ans2.txt"));

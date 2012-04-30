@@ -41,7 +41,6 @@ public class Step3 {
 
         for(String filename : Util.getReducerOutputs(Constants.reducer1OutputDir))
             FileInputFormat.addInputPath(job, new Path(Constants.reducer1OutputDir + "/" + filename));
-        //FileInputFormat.addInputPath(job, new Path());
 
         Util.deleteDir(Constants.reducer3OutputDir);
         FileOutputFormat.setOutputPath(job, new Path(

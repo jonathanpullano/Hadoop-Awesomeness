@@ -52,7 +52,7 @@ public class Reducer1 extends
             if ((p > height) && memory.contains(p - height)) // left
                 set.union(p, p - height);
             
-            if ((p % len != 1) && memory.contains(p-1)) // bottom
+            if ((p % height != 1) && memory.contains(p-1)) // bottom
                 set.union(p, p - 1);
         }
         
