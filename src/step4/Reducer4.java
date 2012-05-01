@@ -32,7 +32,7 @@ public class Reducer4 extends
 		}
 
 		for (final int i : component) {
-			if (component.contains(i + 1)) {
+			if (((i % height) != 0) && component.contains(i + 1)) {
 				num_of_edges++;
 			}
 			if (component.contains(i + height)) {
@@ -41,6 +41,7 @@ public class Reducer4 extends
 		}
 
 		final Tuple out_tuple = new Tuple(num_of_nodes, num_of_edges);
-		context.write(key, out_tuple);
+		context.write(new IntWritable(1), out_tuple);
+		// context.write(key, out_tuple);
 	}
 }
