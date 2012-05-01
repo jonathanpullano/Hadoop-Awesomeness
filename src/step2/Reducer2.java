@@ -1,8 +1,8 @@
 package step2;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.TreeSet;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -14,8 +14,8 @@ import constants.Constants;
 public class Reducer2 extends
         Reducer<IntWritable, Tuple, IntWritable, IntWritable> {
 
-    DisjointSet set = new DisjointSet((2 * Constants.g - 2) * Constants.M);
-    ArrayList<Tuple> inputList = new ArrayList<Tuple>();
+    DisjointSet set = new DisjointSet(2 * Constants.numGroups * Constants.M);
+    TreeSet<Integer> inputs = new TreeSet<Integer>(); //TODO: log(n) insertions means nlogn runtime
     
     @Override
     protected void reduce(
@@ -28,17 +28,10 @@ public class Reducer2 extends
         while(iter.hasNext()) {
             Tuple t1 = new Tuple(iter.next());
             set.union(t1.getFirst(), t1.getSecond());
-            if(iter.hasNext()) {
-                Tuple t2 = new Tuple(iter.next());
-                set.union(t2.getFirst(), t2.getSecond());
-            }
-            inputList.add(t1);
+            inputs.add(t1.getFirst());
         }
 
-        int group = key.get();
-        if(group == Constants.numGroups - 2) { //FIXME!
-            for(Tuple tup : inputList)
-                context.write(new IntWritable(tup.getFirst()), new IntWritable(set.find(tup.getFirst())));
-        }
+        for(Integer pVal : inputs)
+            context.write(new IntWritable(pVal), new IntWritable(set.find(pVal)));
     }
 }

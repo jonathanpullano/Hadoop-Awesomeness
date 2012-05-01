@@ -14,7 +14,7 @@ import test.Util;
 import constants.Constants;
 
 public class Step2 {
-    public void run(final String inputFile) throws Exception {
+    public void run() throws Exception {
         final Configuration conf = new Configuration();
 
         final Job job = new Job(conf, "Step2");
@@ -29,7 +29,10 @@ public class Step2 {
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
-        FileInputFormat.addInputPath(job, new Path(inputFile));
+        //TODO: Consider interleaving on reducer2
+        for(String filename : Util.getReducerOutputs(Constants.reducer1OutputDir, "test"))
+            FileInputFormat.addInputPath(job, new Path(Constants.reducer1OutputDir + "/" + filename));
+        //FileInputFormat.addInputPath(job, new Path(Constants.reducer1OutputDir));
 
         Util.deleteDir(Constants.reducer2OutputDir);
         FileOutputFormat.setOutputPath(job, new Path(
@@ -37,9 +40,6 @@ public class Step2 {
 
         job.waitForCompletion(true);
     }
-
-    public static void main(final String[] args) throws Exception {
-        final Step2 step = new Step2();
-        step.run("data/step2/test1.txt");
-    }
+    
+    
 }

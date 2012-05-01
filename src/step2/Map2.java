@@ -33,7 +33,7 @@ public class Map2 extends Mapper<LongWritable, Text, IntWritable, Tuple> {
             final int q = Integer.parseInt(word_q.toString());
             
             if (MatrixUtilities.isBoundary(p))
-                context.write(new IntWritable(g), new Tuple(p, q));
+                context.write(new IntWritable(0), new Tuple(p, q));
         }
     }
 }

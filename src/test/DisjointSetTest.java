@@ -50,4 +50,26 @@ public class DisjointSetTest {
         assertTrue(set.find(7) == 7);
         assertTrue(set.find(8) == 7);
     }
+    
+    @Test
+    public void testFind2() {
+        final DisjointSet set = new DisjointSet(9);
+        set.union(65, 56);
+        set.union(67, 58);
+        set.union(69, 60);
+        set.union(74, 65);
+        set.union(75, 74);
+        set.union(65, 67);
+        set.union(76, 75);
+        set.union(78, 69);
+        assertTrue(set.find(78) == 60);
+        assertTrue(set.find(69) == 60);
+        assertTrue(set.find(60) == 60);
+        assertTrue(set.find(58) == 56);
+        assertTrue(set.find(67) == 56);
+        assertTrue(set.find(76) == 56);
+        assertTrue(set.find(75) == 56);
+        assertTrue(set.find(74) == 56);
+        assertTrue(set.find(65) == 56);
+    }
 }

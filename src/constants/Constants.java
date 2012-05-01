@@ -16,11 +16,11 @@ public class Constants {
 	public static float wMin = 0.4f * fromNetID;
 	public static float wLimit = wMin + desiredDensity;
 
-	public final static boolean DEBUG = true;
+    public final static boolean DEBUG = true;
 
-	public static final String reducer1OutputDir = "data/output/reducer1/";
-	public static final String reducer2OutputDir = "data/output/reducer2/";
-	public static final String reducer3OutputDir = "data/output/reducer3/";
+    public static final String reducer1OutputDir = "data/output/reducer1/";
+    public static final String reducer2OutputDir = "data/output/reducer2/";
+    public static final String reducer3OutputDir = "data/output/reducer3/";
 	public static final String reducer4OutputDir = "data/output/reducer4/";
 	public static final String reducer5OutputDir = "data/output/reducer5/";
 }
