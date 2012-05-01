@@ -18,11 +18,17 @@ public class MatrixUtilities {
 	}
 
 	/**
-	 * Computes the column group for a position given a M value and a column
+	 * Computes the primary column group for a position given a M value and a
+	 * column. </br> </br> NOTE: if the column is a boundary column, this will
+	 * give its primary column group. To find its secondary column group,
+	 * subtract 1 from the result.
 	 * 
 	 * @param M
+	 *            The # of columns. Use Constants.M
 	 * @param G
+	 *            The nominal number of columns per group. Use Constants.g
 	 * @param column
+	 *            The number of the column whose group you're looking for.
 	 * @return
 	 */
 	public static int getColumnGroup(final int M, final int G, final int column) {
@@ -33,6 +39,13 @@ public class MatrixUtilities {
 		return column_group;
 	}
 
+	/**
+	 * Returns true if the column in which this position is contained is a
+	 * boundary column. (ie if this column num divides g)
+	 * 
+	 * @param position
+	 * @return Returns true if the
+	 */
 	public static boolean isBoundary(final int position) {
 		final int M = Constants.M;
 		final int g = Constants.g;

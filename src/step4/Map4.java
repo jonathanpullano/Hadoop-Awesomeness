@@ -8,7 +8,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class map4 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
+public class Map4 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 	private final Text word = new Text();
 
 	@Override
@@ -21,8 +21,6 @@ public class map4 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 		while (tokenizer.hasMoreTokens()) {
 			// 1. get p
 			word.set(tokenizer.nextToken());
-
-			// 2. Convert the p to an int
 			final int p = Integer.parseInt(word.toString());
 			final IntWritable p_out = new IntWritable(p);
 
@@ -31,7 +29,7 @@ public class map4 extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 			final int q = Integer.parseInt(word.toString());
 			final IntWritable q_out = new IntWritable(q);
 
-			context.write(p_out, q_out);
+			context.write(q_out, p_out);
 		}
 	}
 }
