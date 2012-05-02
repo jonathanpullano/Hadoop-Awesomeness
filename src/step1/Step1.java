@@ -39,5 +39,4 @@ public class Step1 {
 
         job.waitForCompletion(true);
     }
-		step1.run("data/appendix_test_files/data6-36.txt");
 }
