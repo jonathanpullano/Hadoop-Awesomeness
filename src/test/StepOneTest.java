@@ -20,6 +20,7 @@ public class StepOneTest {
         Constants.wLimit = 1.25f;
         Constants.wMin = .75f;
         Constants.DEBUG = true;
+        Constants.COMPUTE_DIAGONAL = false;
     }
 
     @Test

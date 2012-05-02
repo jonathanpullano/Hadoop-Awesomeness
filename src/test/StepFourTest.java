@@ -15,6 +15,7 @@ public class StepFourTest {
 		Constants.N = 16;
 		Constants.M = (int) Math.sqrt(Constants.N);
 		Constants.g = 2;
+		Constants.COMPUTE_DIAGONAL = false;
 		// Constants.numGroups = Constants.M / Constants.g;
 		// Constants.groupSize = Constants.M * (Constants.g+1);
 		// Constants.wLimit = 1.25f;

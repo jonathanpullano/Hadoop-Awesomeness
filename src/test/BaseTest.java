@@ -13,6 +13,7 @@ public class BaseTest {
     @Test
     public void test36() throws Exception {
         // This code is evil
+        Constants.COMPUTE_DIAGONAL = false;
         Constants.N = 36;
         Constants.M = (int) Math.sqrt(Constants.N);
         Constants.g = 2;
@@ -28,6 +29,7 @@ public class BaseTest {
 */
     @Test
     public void testIsolation() throws Exception {
+        Constants.COMPUTE_DIAGONAL = false;
         Constants.N = 1600;
         Constants.M = (int) Math.sqrt(Constants.N);
         Constants.g = 3;
@@ -43,6 +45,7 @@ public class BaseTest {
 /*
     @Test
     public void testSean() throws Exception {
+        Constants.COMPUTE_DIAGONAL = false;
         Constants.N = 81;
         Constants.M = (int) Math.sqrt(Constants.N);
         Constants.g = 3;
