@@ -25,11 +25,12 @@ public class Map3 extends Mapper<LongWritable, Text, IntWritable, Tuple> {
     int red2_p, red2_q;
 
     private void init() throws FileNotFoundException {
-        if (scanner != null) return;
-        scanner = new Scanner(new File(Constants.reducer2OutputDir + "/part-r-00000")); //TODO: Update to use output dir
-        while(scanner.hasNext()) {
+        if (scanner != null)
+            return;
+        scanner = new Scanner(new File(Constants.reducer2OutputDir
+                + "/part-r-00000")); // TODO: Update to use output dir
+        while (scanner.hasNext())
             red2Map.put(scanner.nextInt(), scanner.nextInt());
-        }
     }
 
     @Override
@@ -38,6 +39,7 @@ public class Map3 extends Mapper<LongWritable, Text, IntWritable, Tuple> {
         init();
         final String line = value.toString();
         final StringTokenizer tokenizer = new StringTokenizer(line);
+        @SuppressWarnings("unused")
         int red1_g, red1_p, red1_q;
         red1Word_g.set(tokenizer.nextToken());
         red1Word_p.set(tokenizer.nextToken());
@@ -46,14 +48,12 @@ public class Map3 extends Mapper<LongWritable, Text, IntWritable, Tuple> {
         red1_g = Integer.parseInt(red1Word_g.toString());
         red1_p = Integer.parseInt(red1Word_p.toString());
         red1_q = Integer.parseInt(red1Word_q.toString());
-                
+
         context.write(new IntWritable(red1_g), new Tuple(red1_p, red1_p));
-        System.out.println(red1_g + " " + red1_p + " " + red1_p);
-        
-        if(red2Map.containsKey(red1_p)) {
-            int find = red2Map.get(red1_p);
+
+        if (red2Map.containsKey(red1_p)) {
+            final int find = red2Map.get(red1_p);
             context.write(new IntWritable(red1_g), new Tuple(red1_p, find));
-            System.out.println(red1_g + " " + red1_p + " " + find);
         }
     }
 }
