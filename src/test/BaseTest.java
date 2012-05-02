@@ -1,5 +1,7 @@
 package test;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import base.BaseClass;
@@ -15,13 +17,15 @@ public class BaseTest {
         Constants.g = 3;
         Constants.numGroups = Constants.M / Constants.g;
         Constants.groupSize = Constants.M * (Constants.g + 1);
-        Constants.wLimit = 1.25f;
-        Constants.wMin = .75f;
+        Constants.wLimit = 1f;
+        Constants.wMin = 0.1f;
         Constants.DEBUG = true;
     }
 
     @Test
     public void testRun() throws Exception {
         base.start("data/appendix_test_files/data6-36.txt");
+        assertTrue(Util.checkOutput(Constants.reducer5OutputDir
+                + "part-r-00000", "data/base/ans-36.txt"));
     }
 }
