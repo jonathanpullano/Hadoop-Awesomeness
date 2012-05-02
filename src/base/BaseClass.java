@@ -7,7 +7,7 @@ import step3.Step3;
 public class BaseClass {
     public static void main(final String[] args) throws Exception {
         final BaseClass base = new BaseClass();
-        base.start("data/appendix_test_files/data6-36.txt");
+        base.start("data/appendix_test_files/data7.txt");
     }
 
     public void start(final String inputFile) throws Exception {

@@ -11,7 +11,7 @@ public class BaseTest {
     private final BaseClass base = new BaseClass();
 
     @Test
-    public void testRun() throws Exception {
+    public void test36() throws Exception {
         // This code is evil
         Constants.N = 36;
         Constants.M = (int) Math.sqrt(Constants.N);
@@ -41,4 +41,5 @@ public class BaseTest {
         assertTrue(Util.checkOutput(Constants.reducer3OutputDir
                 + "/part-r-00000", "data/step1/ans-sean.txt"));
     }
+
 }
