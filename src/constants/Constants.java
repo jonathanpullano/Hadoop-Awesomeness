@@ -17,6 +17,7 @@ public class Constants {
     public static float wLimit = wMin + desiredDensity;
 
     public static boolean DEBUG = true;
+    public static boolean COMPUTE_DIAGONAL = false;
 
     public static String reducer1OutputDir = "data/output/reducer1/";
     public static String reducer2OutputDir = "data/output/reducer2/";

@@ -1,7 +1,6 @@
 package step3;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.HashSet;
 
 import org.apache.hadoop.io.IntWritable;
@@ -17,7 +16,6 @@ public class Reducer3 extends
 
     DisjointSet set = new DisjointSet(Constants.groupSize);
     HashSet<Integer> pointMemory = new HashSet<Integer>();
-    HashMap<Integer, Integer> boundaryMemory = new HashMap<Integer, Integer>();
     final int height = Constants.M;
 
     @Override
@@ -29,7 +27,6 @@ public class Reducer3 extends
 
         set = new DisjointSet(Constants.groupSize);
         pointMemory = new HashSet<Integer>(Constants.groupSize);
-        boundaryMemory = new HashMap<Integer, Integer>(Constants.groupSize);
 
         final int group = key.get();
 
@@ -49,19 +46,26 @@ public class Reducer3 extends
 
         // Pass 2 - Unions
         for (int p = minP; p <= maxP; p++) {
-            if (!pointMemory.contains(p) && !boundaryMemory.containsKey(p))
+            if (!pointMemory.contains(p))
                 continue;
 
-            if (((p > height) && pointMemory.contains(p - height))
-                    || boundaryMemory.containsKey(p - height)) // left
+            if (((p > height) && pointMemory.contains(p - height))) // left
                 set.union(p, p - height);
 
-            if (((p % height != 1) && pointMemory.contains(p - 1))
-                    || boundaryMemory.containsKey(p - 1)) // bottom
+            if (((p % height != 1) && pointMemory.contains(p - 1))) // bottom
                 set.union(p, p - 1);
-
-            if (boundaryMemory.containsKey(p))
-                set.union(p, boundaryMemory.get(p));
+            
+            if (Constants.COMPUTE_DIAGONAL) {
+                //Compute lower left diagonal
+                if(p > height && p % height != 1 && pointMemory.contains(p - height - 1)) {
+                    set.union(p, p - height - 1);
+                }
+                
+                //Compute upper right diagonal
+                if(p > height && p % height != 0 && pointMemory.contains(p - height)) {
+                    set.union(p, p - height + 1);
+                }
+            }
         }
 
         if (group != Constants.numGroups - 1)
@@ -69,12 +73,11 @@ public class Reducer3 extends
 
         // Pass 3 - Find and output
         for (int p = minP; p <= maxP; p++) {
-            if (!pointMemory.contains(p) && !boundaryMemory.containsKey(p))
+            if (!pointMemory.contains(p))
                 continue;
 
             context.write(new IntWritable(p), new IntWritable(set.find(p)));
         }
         pointMemory.clear();
-        boundaryMemory.clear();
     }
 }
