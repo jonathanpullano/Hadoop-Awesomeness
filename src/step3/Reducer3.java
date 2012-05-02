@@ -34,15 +34,20 @@ public class Reducer3 extends
         pointMemory = new HashSet<Integer>(Constants.groupSize);
         boundaryMemory = new HashMap<Integer, Integer>(Constants.groupSize);
         
-        int len;
         final int group = key.get();
-        if(group == Constants.numGroups - 1)
-            len = Constants.g;
-        else 
-            len = Constants.g + 1;
         
         //Pass 1 - Build a memory to "sort" the values
-        Iterator<Tuple> iter = values.iterator();
+        for(Tuple tup : values) {
+            int p, q;
+            p = tup.getFirst();
+            q = tup.getSecond();
+            if(tup.getFirst() != tup.getSecond())
+                set.union(p, q);
+            else
+                pointMemory.add(p);
+        }
+        
+        /*Iterator<Tuple> iter = values.iterator();
         int prevP = -1;
         while(iter.hasNext()) {
             Tuple curTup = iter.next();
@@ -52,7 +57,7 @@ public class Reducer3 extends
             else
                 pointMemory.add(curP);
             prevP = curP;
-        }
+        }*/
         
         int minP = MatrixUtilities.minInGroup(group);
         int maxP = MatrixUtilities.maxInGroup(group);

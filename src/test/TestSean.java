@@ -21,15 +21,15 @@ public class TestSean {
         Constants.wMin = .75f;
         Constants.DEBUG = true;
         
-        Constants.reducer1OutputDir = "data/output/reducer1";
+        Constants.reducer1OutputDir = "data/output/reducer1/";
         Step1 stepOne = new Step1();
         stepOne.run("data/step1/test-sean.txt");
-        Constants.reducer2OutputDir = "data/output/reducer2";
+        Constants.reducer2OutputDir = "data/output/reducer2/";
         Step2 stepTwo = new Step2();
         stepTwo.run();
-        Constants.reducer3OutputDir = "data/output/reducer3";
+        Constants.reducer3OutputDir = "data/output/reducer3/";
         Step3 stepThree = new Step3();
         stepThree.run();
-        assertTrue(Util.checkOutput(Constants.reducer3OutputDir + "/part-r-00000", "data/step1/ans-sean.txt"));
+        assertTrue(Util.checkOutput(Constants.reducer3OutputDir + "part-r-00000", "data/step1/ans-sean.txt"));
     }
 }
