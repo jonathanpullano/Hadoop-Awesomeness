@@ -46,7 +46,7 @@ public class Step1 {
 
 	public static void main(final String[] args) throws Exception {
 		final Step1 step1 = new Step1();
-		step1.run("data/appendix_test_files/data11.txt");
+		step1.run("data/appendix_test_files/data6-36.txt");
 
 		final Step2 step2 = new Step2();
 		step2.run();
