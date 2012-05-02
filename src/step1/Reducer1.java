@@ -47,6 +47,18 @@ public class Reducer1 extends
 			if ((p > height) && memory.contains(p - height)) {
 				set.union(p, p - height);
 			}
+			
+			if (Constants.COMPUTE_DIAGONAL) {
+			    //Compute lower left diagonal
+			    if(p > height && p % height != 1 && memory.contains(p - height - 1)) {
+			        set.union(p, p - height - 1);
+			    }
+			    
+			    //Compute upper right diagonal
+			    if(p > height && p % height != 0 && memory.contains(p - height)) {
+			        set.union(p, p - height + 1);
+			    }
+			}
 
 			if (((p % height) != 1) && memory.contains(p - 1)) {
 				set.union(p, p - 1);

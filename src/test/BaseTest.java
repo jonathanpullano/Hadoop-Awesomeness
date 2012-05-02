@@ -37,6 +37,7 @@ public class BaseTest {
 //
     @Test
     public void testFull() throws Exception {
+
         Constants.N = 1600;
         Constants.g = 10;
         Constants.wLimit = 1f;
@@ -46,6 +47,7 @@ public class BaseTest {
         assertTrue(Util.checkOutput(Constants.reducer5OutputDir
                 + "part-r-00000", "data/base/ans3.txt"));
     }
+
 //
 //    @Test
 //    public void testSean() throws Exception {
@@ -59,5 +61,4 @@ public class BaseTest {
 //        assertTrue(Util.checkOutput(Constants.reducer3OutputDir
 //                + "/part-r-00000", "data/step1/ans-sean.txt"));
 //    }
-
 }
