@@ -42,6 +42,6 @@ public class Step4 {
 
 	public static void main(final String[] args) throws Exception {
 		final Step4 step = new Step4();
-		step.run("data/step4/test2.txt");
+		step.run(Constants.reducer3OutputDir);
 	}
 }

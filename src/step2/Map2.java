@@ -28,7 +28,7 @@ public class Map2 extends Mapper<LongWritable, Text, IntWritable, Tuple> {
             word_p.set(tokenizer.nextToken());
             word_q.set(tokenizer.nextToken());
 
-            final int g = Integer.parseInt(word_G.toString());
+            Integer.parseInt(word_G.toString());
             final int p = Integer.parseInt(word_p.toString());
             final int q = Integer.parseInt(word_q.toString());
             
