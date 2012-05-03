@@ -1,4 +1,4 @@
-package step3;
+package step5;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -10,44 +10,30 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 import structures.Tuple;
-import test.Util;
 import constants.Constants;
 
-public class Step3 {
-	boolean setReducer = true;
-
-	public void disableReducer() {
-		setReducer = false;
-	}
+public class HadoopStep5 {
 
 	public void run() throws Exception {
 		final Configuration conf = new Configuration();
-		final Job job = new Job(conf, "Step3");
 
-		job.setJarByClass(Step3.class);
+		final Job job = new Job(conf, "Step5");
+		job.setJarByClass(HadoopStep5.class);
 
 		job.setOutputKeyClass(IntWritable.class);
 		job.setOutputValueClass(Tuple.class);
 
-		job.setMapperClass(Map3.class);
-		if (setReducer) {
-			job.setReducerClass(Reducer3.class);
-		}
-
-		job.setPartitionerClass(TupleGroupPartitioner.class);
+		job.setMapperClass(Map5.class);
+		job.setReducerClass(Reducer5.class);
 
 		job.setInputFormatClass(TextInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
 
-		for (final String filename : Util
-				.getReducerOutputs(Constants.reducer1OutputDir)) {
-			FileInputFormat.addInputPath(job, new Path(
-					Constants.reducer1OutputDir + "/" + filename));
-		}
+		FileInputFormat.addInputPath(job, new Path(Constants.bucket
+				+ Constants.reducer4OutputDirAWS));
 
-		Util.deleteDir(Constants.reducer3OutputDir);
-		FileOutputFormat.setOutputPath(job, new Path(
-				Constants.reducer3OutputDir));
+		FileOutputFormat.setOutputPath(job, new Path(Constants.bucket
+				+ Constants.reducer5OutputDirAWS));
 
 		job.waitForCompletion(true);
 	}

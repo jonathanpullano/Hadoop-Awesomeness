@@ -13,9 +13,8 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import structures.Tuple;
-import constants.Constants;
 
-public class Map3 extends Mapper<LongWritable, Text, IntWritable, Tuple> {
+public class HadoopMap3 extends Mapper<LongWritable, Text, IntWritable, Tuple> {
 
 	private final Text red1Word_g = new Text();
 	private final Text red1Word_p = new Text();
@@ -28,8 +27,11 @@ public class Map3 extends Mapper<LongWritable, Text, IntWritable, Tuple> {
 		if (scanner != null) {
 			return;
 		}
-		scanner = new Scanner(new File(Constants.reducer2OutputDir
-				+ "/part-r-00000")); // TODO: Update to use output dir
+		final String file_name = "https://s3.amazonaws.com/edu-cornell-cs-cs5300s12-cgd36-test/outputStep2/part-r-00000";
+		// new File(Constants.bucket + Constants.reducer2OutputDirAWS +
+		// "/part-r-00000"
+		scanner = new Scanner(new File(file_name));
+		// TODO: Update to use output dir
 		while (scanner.hasNext()) {
 			red2Map.put(scanner.nextInt(), scanner.nextInt());
 		}
