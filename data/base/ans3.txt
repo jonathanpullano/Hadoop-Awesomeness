@@ -1,0 +1,8 @@
+total edges	3120.0
+total nodes	1600.0
+total components	1.0
+max component size	1600.0
+min component size	1600.0
+raw average	1600.0
+weighted average	1600.0
+burn count	1600.0

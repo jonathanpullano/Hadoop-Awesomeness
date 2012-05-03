@@ -39,7 +39,7 @@ public class Step3 {
 		job.setInputFormatClass(TextInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
 
-		for (final String filename : Util
+        FileInputFormat.addInputPath(job, new Path(Constants.reducer2OutputDir));
 				.getReducerOutputs(Constants.reducer1OutputDir)) {
 			FileInputFormat.addInputPath(job, new Path(
 					Constants.reducer1OutputDir + "/" + filename));
