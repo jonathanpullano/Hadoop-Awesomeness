@@ -1,0 +1,25 @@
+JAR LOCATION:
+
+[bucket]/[JAR]
+
+edu-cornell-cs-cs5300s12-cgd36-test/hadooper1.jar
+
+
+
+JAR ARGUMENTS: 
+
+Note the space between the arguments and the "s3n://" prefix.
+
+s3n://[bucket for output folders] s3n://[input folder - full path!]
+
+s3n://edu-cornell-cs-cs5300s12-cgd36-test/ s3n://edu-cornell-cs-cs5300s12-cgd36-test/input7 
+
+
+
+LOG:
+
+[bucket]/[folder in bucket]
+
+edu-cornell-cs-cs5300s12-cgd36-test/log
+
+

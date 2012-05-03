@@ -6,7 +6,7 @@ public class Constants {
 	// public final static int N = 9; // <- step 1
 
 	public static int M = (int) Math.sqrt(N);
-	public static int g = 2; // Length of Group
+	public static int g = 10; // Length of Group
 	public static int numGroups = M / g;
 	public static int groupSize = M * (g + 1);
 
@@ -17,7 +17,7 @@ public class Constants {
 	public static float wLimit = wMin + desiredDensity;
 
 	public static boolean DEBUG = true;
-    public static boolean COMPUTE_DIAGONAL = false;
+	public static boolean COMPUTE_DIAGONAL = false;
 
 	// local vars:
 	public static String reducer1OutputDir = "data/output/reducer1/";

@@ -28,7 +28,7 @@ public class HadoopStep3 {
 		job.setOutputKeyClass(IntWritable.class);
 		job.setOutputValueClass(Tuple.class);
 
-		job.setMapperClass(Map3New.class);
+		job.setMapperClass(Map3.class);
 		if (setReducer) {
 			job.setReducerClass(Reducer3.class);
 		}

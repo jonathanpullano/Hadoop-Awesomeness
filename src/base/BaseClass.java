@@ -2,7 +2,7 @@ package base;
 
 import step1.Step1;
 import step2.Step2;
-import step3.Step3New;
+import step3.Step3;
 import step4.Step4;
 import step5.Step5;
 import constants.Constants;
@@ -10,7 +10,7 @@ import constants.Constants;
 public class BaseClass {
 	public static void main(final String[] args) throws Exception {
 		final BaseClass base = new BaseClass();
-        base.start("data/appendix_test_files/data7.txt");
+		base.start("data/appendix_test_files/data7.txt");
 	}
 
 	public void start(final String inputFile) throws Exception {
@@ -20,7 +20,7 @@ public class BaseClass {
 		final Step2 step2 = new Step2();
 		step2.run();
 
-		final Step3New step3 = new Step3New();
+		final Step3 step3 = new Step3();
 		step3.run();
 
 		final Step4 step4 = new Step4();
