@@ -9,7 +9,6 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-import step2.Step2;
 import test.Util;
 import constants.Constants;
 
@@ -39,22 +38,5 @@ public class Step1 {
 				Constants.reducer1OutputDir));
 
 		job.waitForCompletion(true);
-	}
-
-	public static void main(final String[] args) throws Exception {
-		final Step1 step1 = new Step1();
-		step1.run("data/appendix_test_files/data6-36.txt");
-
-		final Step2 step2 = new Step2();
-		step2.run();
-
-		// final Step3 step3 = new Step3();
-		// step3.run();
-
-		// final Step4 step4 = new Step4();
-		// step4.run(Constants.reducer3OutputDir);
-
-		// final Step5 step5 = new Step5();
-		// step5.run(Constants.reducer4OutputDir);
 	}
 }

@@ -51,6 +51,12 @@ public class MatrixUtilities {
 		final int g = Constants.g;
 		final int column = MatrixUtilities.getColumn(M, position);
 
+		// a strange edge case, where g==1. Not likely to actually happen,
+		// but...
+		if ((column == 0) && (Constants.g == 1)) {
+			return true;
+		}
+
 		if ((column != 0) && ((column % g) == 0)) {
 			return true;
 		} else {

@@ -72,17 +72,19 @@ public class Reducer5 extends Reducer<IntWritable, Tuple, Text, FloatWritable> {
 					* weighted_average;
 		}
 
-		context.write(new Text("total edges"), new FloatWritable(total_edges));
-		context.write(new Text("total nodes"), new FloatWritable(total_nodes));
-		context.write(new Text("total components"), new FloatWritable(
+		context.write(new Text("Edges = "), new FloatWritable(total_edges));
+		context.write(new Text("Vertices = "), new FloatWritable(total_nodes));
+		context.write(new Text("Components = "), new FloatWritable(
 				total_components));
-		context.write(new Text("max component size"), new FloatWritable(
+		context.write(new Text("Max CC size = "), new FloatWritable(
 				max_component_size));
-		context.write(new Text("min component size"), new FloatWritable(
+		context.write(new Text("Min CC size = "), new FloatWritable(
 				min_component_size));
-		context.write(new Text("raw average"), new FloatWritable(raw_average));
-		context.write(new Text("weighted average"), new FloatWritable(
+		context.write(new Text("Avg CC size = "),
+				new FloatWritable(raw_average));
+		context.write(new Text("Weighted avg CC size = "), new FloatWritable(
 				weighted_average));
-		context.write(new Text("burn count"), new FloatWritable(burn_count));
+		context.write(new Text("Avg burn count = "), new FloatWritable(
+				burn_count));
 	}
 }
