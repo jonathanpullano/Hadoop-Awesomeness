@@ -41,6 +41,9 @@ public class HadoopStep3 {
 		FileInputFormat.addInputPath(job, new Path(Constants.bucket
 				+ Constants.reducer1OutputDirAWS));
 
+		FileInputFormat.addInputPath(job, new Path(Constants.bucket
+				+ Constants.reducer2OutputDirAWS));
+
 		FileOutputFormat.setOutputPath(job, new Path(Constants.bucket
 				+ Constants.reducer3OutputDirAWS));
 

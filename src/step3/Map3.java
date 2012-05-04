@@ -21,12 +21,12 @@ public class Map3 extends Mapper<LongWritable, Text, IntWritable, Tuple> {
 		final StringTokenizer tokenizer = new StringTokenizer(line);
 		int g, p, q;
 
-		if (tokenizer.countTokens() == 3) {
+		if (tokenizer.countTokens() == 3) { // from step 1: all values
 			g = Integer.parseInt(tokenizer.nextToken());
 			p = Integer.parseInt(tokenizer.nextToken());
 			q = Integer.parseInt(tokenizer.nextToken());
 			context.write(new IntWritable(g), new Tuple(p, p));
-		} else if (tokenizer.countTokens() == 2) {
+		} else if (tokenizer.countTokens() == 2) { // from step 2: border values
 			p = Integer.parseInt(tokenizer.nextToken());
 			q = Integer.parseInt(tokenizer.nextToken());
 			g = MatrixUtilities.getColumnGroup(Constants.M, Constants.g,

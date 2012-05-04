@@ -12,13 +12,13 @@
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;structures{TupleComparator.java"/>
-        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;base{HadoopBaseClass.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step4{HadoopStep4.java"/>
+        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;base{HadoopBaseClass.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step1{Reducer1.java"/>
+        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;structures{MatrixUtilities.java"/>
+        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step5{Map5.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step3{TupleGroupPartitioner.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step3{Map3.java"/>
-        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step5{Map5.java"/>
-        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;structures{MatrixUtilities.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step3{Reducer3.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step1{GroupPartitioner.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step2{Map2.java"/>
@@ -27,10 +27,10 @@
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;constants{Constants.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step5{HadoopStep5.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;structures{IntComparator.java"/>
-        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step4{Reducer4.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;structures{Tuple.java"/>
-        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step1{HadoopStep1.java"/>
+        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step4{Reducer4.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step2{Reducer2.java"/>
+        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step1{HadoopStep1.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step1{Map1.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step3{HadoopStep3.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step5{Reducer5.java"/>
