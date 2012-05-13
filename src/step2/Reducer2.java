@@ -9,10 +9,11 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import structures.DisjointSet;
 import structures.Tuple;
+import base.PingingReducer;
 import constants.Constants;
 
 public class Reducer2 extends
-        Reducer<IntWritable, Tuple, IntWritable, IntWritable> {
+        PingingReducer<IntWritable, Tuple, IntWritable, IntWritable> {
 
     DisjointSet set = new DisjointSet(2 * Constants.numGroups * Constants.M);
     TreeSet<Integer> inputs = new TreeSet<Integer>(); //TODO: log(n) insertions means nlogn runtime

@@ -2,20 +2,20 @@ package constants;
 
 public class Constants {
 	// Total size of the file (probably should be read)
-	public static int N = 1600; // <- step 2
-	// public final static int N = 9; // <- step 1
-
+	public static int N = 100000000;
+	// stats:
 	public static int M = (int) Math.sqrt(N);
-	public static int g = 10; // Length of Group
+	public static int g = M / 16;
 	public static int numGroups = M / g;
 	public static int groupSize = M * (g + 1);
 
 	// compute filter parameters for netid ak883
-	public static float fromNetID = 0.388f;
+	public static final float fromNetID = 0.388f;
 	public static float desiredDensity = 0.59f;
 	public static float wMin = 0.4f * fromNetID;
 	public static float wLimit = wMin + desiredDensity;
 
+	// debug and extra credit vars:
 	public static boolean DEBUG = true;
 	public static boolean COMPUTE_DIAGONAL = false;
 
@@ -34,14 +34,29 @@ public class Constants {
 	public static String reducer4OutputDirAWS = "outputStep4";
 	public static String reducer5OutputDirAWS = "outputStep5";
 
-	public static void setBucket(String b) {
-		if (!b.endsWith("/")) {
-			b = b + "/";
+	/**
+	 * 
+	 * @param output
+	 *            bucket_name
+	 */
+	public static void setOutputBucket(String bucket_name) {
+		if (!bucket_name.endsWith("/")) {
+			bucket_name = bucket_name + "/";
 		}
-		if (!b.startsWith("s3n://")) {
-			b = "s3n://" + b;
+		if (!bucket_name.startsWith("s3n://")) {
+			bucket_name = "s3n://" + bucket_name;
 		}
-		bucket = bucket + b;
+		bucket = bucket + bucket_name;
 	}
 
+	public static void setLimit(final float f) {
+		desiredDensity = f;
+		wLimit = wMin + desiredDensity;
+	}
+
+	/*
+	 * public static void setParams(final int N_in, final int g_in) { N = N_in;
+	 * g = g_in; M = (int) Math.sqrt(N); numGroups = M / g; groupSize = M * (g +
+	 * 1); }
+	 */
 }

@@ -1,25 +1,56 @@
 JAR LOCATION:
 
-[bucket]/[JAR]
-
-edu-cornell-cs-cs5300s12-cgd36-test/hadooper1.jar
+	form:	[bucket]/[JAR]
+	
+	ex:		edu-cornell-cs-cs5300s12-cgd36-test/hadooper1.jar
 
 
 
 JAR ARGUMENTS: 
 
-Note the space between the arguments and the "s3n://" prefix.
-
-s3n://[bucket for output folders] s3n://[input folder - full path!]
-
-s3n://edu-cornell-cs-cs5300s12-cgd36-test/ s3n://edu-cornell-cs-cs5300s12-cgd36-test/input7 
-
-
+	Note the space between the arguments and the "s3n://" prefix to access HFS folders.
+	NOTE: output folder must not exist!!!
+	
+	form:	s3n://[bucket for output folders] s3n://[input folder - full path!] {N g density}
+	
+	ex: DATA 7, TEST BUCKET:
+	
+		s3n://edu-cornell-cs-cs5300s12-cgd36-test/ s3n://edu-cornell-cs-cs5300s12-cgd36-test/input7 
+	
+	ex: DATA 7, PROF BUCKET:
+	
+		s3n://edu-cornell-cs-cs5300s12-cgd36-test/ s3n://edu-cornell-cs-cs5300s12-assign5-data/data7.txt 
+	
 
 LOG:
 
-[bucket]/[folder in bucket]
+	form:	[bucket]/[folder in bucket]
+	
+	ex:		edu-cornell-cs-cs5300s12-cgd36-test/log
 
-edu-cornell-cs-cs5300s12-cgd36-test/log
 
+SPECIFIC EXAMPLES:
 
+	MILLION (input from my bucket):
+	
+		edu-cornell-cs-cs5300s12-cgd36-test/hadooperMillion.jar
+		s3n://edu-cornell-cs-cs5300s12-cgd36-test/million s3n://edu-cornell-cs-cs5300s12-cgd36-test/million/millionLines.txt
+	
+	400MILLION (input from prof's bucket):
+		
+		edu-cornell-cs-cs5300s12-cgd36-test/hadooper400Million.jar
+		s3n://edu-cornell-cs-cs5300s12-cgd36-test/400Million s3n://edu-cornell-cs-cs5300s12-assign5-data/production.txt
+
+	100 MILLION FINAL
+	
+		edu-cornell-cs-cs5300s12-cgd36-final/hadooper100Mil.jar
+		s3n://edu-cornell-cs-cs5300s12-cgd36-final/100MillionOut s3n://edu-cornell-cs-cs5300s12-cgd36-test/100Million/production100Million.txt
+		s3n://edu-cornell-cs-cs5300s12-cgd36-final/log
+		
+		
+		s3n://edu-cornell-cs-cs5300s12-cgd36-test/100Million/production100Million.txt
+		
+SSH INTO MASTER
+
+	ssh hadoop@ec2-174-129-64-26.compute-1.amazonaws.com -i /usr/local/Amazon_AWS_keypair/cgd39KeyPair.pem
+		

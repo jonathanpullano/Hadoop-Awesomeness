@@ -9,10 +9,11 @@ import org.apache.hadoop.mapreduce.Reducer;
 import structures.DisjointSet;
 import structures.MatrixUtilities;
 import structures.Tuple;
+import base.PingingReducer;
 import constants.Constants;
 
 public class Reducer3 extends
-        Reducer<IntWritable, Tuple, IntWritable, IntWritable> {
+        PingingReducer<IntWritable, Tuple, IntWritable, IntWritable> {
 
     DisjointSet set = new DisjointSet(Constants.groupSize);
     HashSet<Integer> pointMemory = new HashSet<Integer>();
@@ -66,6 +67,7 @@ public class Reducer3 extends
                     set.union(p, p - height + 1);
                 }
             }
+            ping(context);
         }
 
         if (group != Constants.numGroups - 1)

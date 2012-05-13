@@ -6,13 +6,15 @@ import java.util.HashSet;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Reducer;
 
+import base.PingingReducer;
+
 import structures.DisjointSet;
 import structures.MatrixUtilities;
 import structures.Tuple;
 import constants.Constants;
 
 public class Reducer1 extends
-		Reducer<IntWritable, IntWritable, IntWritable, Tuple> {
+		PingingReducer<IntWritable, IntWritable, IntWritable, Tuple> {
 
 	DisjointSet set;
 	HashSet<Integer> memory;
@@ -63,6 +65,7 @@ public class Reducer1 extends
 			if (((p % height) != 1) && memory.contains(p - 1)) {
 				set.union(p, p - 1);
 			}
+			ping(context);
 		}
 
 		// Pass 3 - Find and output
