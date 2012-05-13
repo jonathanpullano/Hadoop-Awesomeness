@@ -9,15 +9,24 @@ import constants.Constants;
 
 public class HadoopBaseClass {
 	public static void main(final String[] args) throws Exception {
-		final HadoopStep1 step1 = new HadoopStep1();
 
 		// arg0 sets the bucket where the output folders will be created
-		Constants.setBucket(args[0]);
+		Constants.setOutputBucket(args[0]);
+
+		// Set input
+		final String input = args[1];
+
+		// Set N and g
+		// final int N = Integer.parseInt(args[2]);
+		// final int g = Integer.parseInt(args[3]);
+		// Constants.setParams(N, g);
 
 		// arg1 sets the input folder or file
-		step1.run(args[1]);
+		final HadoopStep1 step1 = new HadoopStep1();
+		step1.run(input);
 
-		// steps 2-5 will be run using the output of the previous steps as input
+		// steps 2-5 will be run, each using the output of the previous step as
+		// input
 		final HadoopStep2 step2 = new HadoopStep2();
 		step2.run();
 

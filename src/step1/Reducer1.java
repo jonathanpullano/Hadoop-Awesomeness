@@ -2,12 +2,14 @@ package step1;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.logging.Logger;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import base.PingingReducer;
 
+import step2.Reducer2;
 import structures.DisjointSet;
 import structures.MatrixUtilities;
 import structures.Tuple;
@@ -19,6 +21,7 @@ public class Reducer1 extends
 	DisjointSet set;
 	HashSet<Integer> memory;
 	final int height = Constants.M;
+	private final static Logger LOGGER = Logger.getLogger(Reducer1.class.getName());
 
 	@Override
 	protected void reduce(
@@ -26,6 +29,7 @@ public class Reducer1 extends
 			final Iterable<IntWritable> values,
 			final Reducer<IntWritable, IntWritable, IntWritable, Tuple>.Context context)
 			throws IOException, InterruptedException {
+	    if (Constants.DEBUG) LOGGER.info("Reducer1 - reduce called");
 
 		set = new DisjointSet(Constants.groupSize);
 		memory = new HashSet<Integer>(Constants.groupSize);
@@ -35,6 +39,7 @@ public class Reducer1 extends
 		// Pass 1 - Build a memory to "sort" the values
 		for (final IntWritable value : values) {
 			memory.add(value.get());
+			if (Constants.DEBUG) LOGGER.info("Reducer1 - pass 1 looped");
 		}
 
 		final int minP = MatrixUtilities.minInGroup(group);
@@ -66,6 +71,7 @@ public class Reducer1 extends
 				set.union(p, p - 1);
 			}
 			ping(context);
+			if (Constants.DEBUG) LOGGER.info("Reducer1 - pass 2 looped");
 		}
 
 		// Pass 3 - Find and output
@@ -75,6 +81,7 @@ public class Reducer1 extends
 			}
 
 			context.write(key, new Tuple(p, set.find(p)));
+			if (Constants.DEBUG) LOGGER.info("Reducer1 - pass 3 looped");
 		}
 		memory.clear();
 	}

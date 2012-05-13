@@ -38,6 +38,14 @@ public class Reducer4 extends
 			if (component.contains(i + height)) {
 				num_of_edges++;
 			}
+			if (Constants.COMPUTE_DIAGONAL == true) {
+				if (((i % height) != 0) && component.contains(i + height + 1)) {
+					num_of_edges++;
+				}
+				if (((i % height) != 1) && component.contains((i + height) - 1)) {
+					num_of_edges++;
+				}
+			}
 		}
 
 		final Tuple out_tuple = new Tuple(num_of_nodes, num_of_edges);

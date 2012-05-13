@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <jardesc>
-    <jar path="/home/conroy/Desktop/hadooper1.jar"/>
+    <jar path="/home/conroy/Desktop/hadooperStep1Test.jar"/>
     <options buildIfNeeded="true" compress="false" descriptionLocation="/Hadoop-Awesomeness/hadoopJAR.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
