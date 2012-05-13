@@ -16,7 +16,7 @@ public class Constants {
 	public static float wMin = 0.4f * fromNetID;
 	public static float wLimit = wMin + desiredDensity;
 
-	public static boolean DEBUG = true;
+	public final static boolean DEBUG = true; // FINAL STATIC optimizes out if(DEBUG) statements
 	public static boolean COMPUTE_DIAGONAL = false;
 
 	// local vars:

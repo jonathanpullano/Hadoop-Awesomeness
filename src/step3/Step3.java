@@ -31,7 +31,7 @@ public class Step3 {
 
 		job.setMapperClass(Map3.class);
 		if (setReducer) {
-			// job.setReducerClass(Reducer3.class);
+			job.setReducerClass(Reducer3.class);
 		}
 
 		job.setPartitionerClass(TupleGroupPartitioner.class);
