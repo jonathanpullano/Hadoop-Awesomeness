@@ -14,27 +14,27 @@ import constants.Constants;
 
 public class HadoopStep5 {
 
-	public void run() throws Exception {
-		final Configuration conf = new Configuration();
+    public void run() throws Exception {
+        final Configuration conf = new Configuration();
 
-		final Job job = new Job(conf, "Step5");
-		job.setJarByClass(HadoopStep5.class);
+        final Job job = new Job(conf, "Step5");
+        job.setJarByClass(HadoopStep5.class);
 
-		job.setOutputKeyClass(IntWritable.class);
-		job.setOutputValueClass(Tuple.class);
+        job.setOutputKeyClass(IntWritable.class);
+        job.setOutputValueClass(Tuple.class);
 
-		job.setMapperClass(Map5.class);
-		job.setReducerClass(Reducer5.class);
+        job.setMapperClass(Map5.class);
+        job.setReducerClass(Reducer5.class);
 
-		job.setInputFormatClass(TextInputFormat.class);
-		job.setOutputFormatClass(TextOutputFormat.class);
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
 
-		FileInputFormat.addInputPath(job, new Path(Constants.bucket
-				+ Constants.reducer4OutputDirAWS));
+        FileInputFormat.addInputPath(job, new Path(Constants.bucket
+                + Constants.reducer4OutputDirAWS));
 
-		FileOutputFormat.setOutputPath(job, new Path(Constants.bucket
-				+ Constants.reducer5OutputDirAWS));
+        FileOutputFormat.setOutputPath(job, new Path(Constants.bucket
+                + Constants.reducer5OutputDirAWS));
 
-		job.waitForCompletion(true);
-	}
+        job.waitForCompletion(true);
+    }
 }

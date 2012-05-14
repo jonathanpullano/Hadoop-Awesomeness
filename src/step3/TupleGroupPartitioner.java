@@ -7,10 +7,10 @@ import structures.Tuple;
 
 public class TupleGroupPartitioner extends Partitioner<IntWritable, Tuple> {
 
-	@Override
-	public int getPartition(final IntWritable key, final Tuple value,
-			final int numGroups) {
-		return key.get() % numGroups;
-	}
+    @Override
+    public int getPartition(final IntWritable key, final Tuple value,
+            final int numGroups) {
+        return key.get() % numGroups;
+    }
 
 }

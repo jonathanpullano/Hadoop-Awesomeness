@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="MacRoman" standalone="no"?>
 <jardesc>
-    <jar path="/home/conroy/Desktop/hadooperStep1Test.jar"/>
+    <jar path="Hadoop-Awesomeness/outputJar/Awesomeness.jar"/>
     <options buildIfNeeded="true" compress="false" descriptionLocation="/Hadoop-Awesomeness/hadoopJAR.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
@@ -12,19 +12,19 @@
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;structures{TupleComparator.java"/>
+        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step1{Reducer1.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step4{HadoopStep4.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;base{HadoopBaseClass.java"/>
-        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step1{Reducer1.java"/>
-        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;structures{MatrixUtilities.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step5{Map5.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step3{TupleGroupPartitioner.java"/>
+        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;structures{MatrixUtilities.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step3{Map3.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step3{Reducer3.java"/>
+        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;constants"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step1{GroupPartitioner.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step2{Map2.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step2{HadoopStep2.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;structures{DisjointSet.java"/>
-        <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;constants{Constants.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;step5{HadoopStep5.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;structures{IntComparator.java"/>
         <javaElement handleIdentifier="=Hadoop-Awesomeness/src&lt;structures{Tuple.java"/>

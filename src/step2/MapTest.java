@@ -10,8 +10,8 @@ import org.apache.hadoop.mapreduce.Mapper;
 import structures.Tuple;
 
 public class MapTest extends Mapper<LongWritable, Text, IntWritable, Tuple> {
-    private final static IntWritable one = new IntWritable(1);
-    private final Text word = new Text();
+    // private final static IntWritable one = new IntWritable(1);
+    // private final Text word = new Text();
 
     @Override
     public void map(final LongWritable key, final Text value,

@@ -12,11 +12,11 @@ public class IntComparator extends WritableComparator {
     }
 
     @Override
-    public int compare(byte[] b1, int s1, int l1,
-            byte[] b2, int s2, int l2) {
+    public int compare(final byte[] b1, final int s1, final int l1,
+            final byte[] b2, final int s2, final int l2) {
 
-        Integer v1 = ByteBuffer.wrap(b1, s1, l1).getInt();
-        Integer v2 = ByteBuffer.wrap(b2, s2, l2).getInt();
+        final Integer v1 = ByteBuffer.wrap(b1, s1, l1).getInt();
+        final Integer v2 = ByteBuffer.wrap(b2, s2, l2).getInt();
 
         return v1.compareTo(v2) * (-1);
     }

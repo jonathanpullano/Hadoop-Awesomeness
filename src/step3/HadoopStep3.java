@@ -13,40 +13,39 @@ import structures.Tuple;
 import constants.Constants;
 
 public class HadoopStep3 {
-	boolean setReducer = true;
+    boolean setReducer = true;
 
-	public void disableReducer() {
-		setReducer = false;
-	}
+    public void disableReducer() {
+        setReducer = false;
+    }
 
-	public void run() throws Exception {
-		final Configuration conf = new Configuration();
-		final Job job = new Job(conf, "HadoopStep3");
+    public void run() throws Exception {
+        final Configuration conf = new Configuration();
+        final Job job = new Job(conf, "HadoopStep3");
 
-		job.setJarByClass(HadoopStep3.class);
+        job.setJarByClass(HadoopStep3.class);
 
-		job.setOutputKeyClass(IntWritable.class);
-		job.setOutputValueClass(Tuple.class);
+        job.setOutputKeyClass(IntWritable.class);
+        job.setOutputValueClass(Tuple.class);
 
-		job.setMapperClass(Map3.class);
-		if (setReducer) {
-			job.setReducerClass(Reducer3.class);
-		}
+        job.setMapperClass(Map3.class);
+        if (setReducer)
+            job.setReducerClass(Reducer3.class);
 
-		job.setPartitionerClass(TupleGroupPartitioner.class);
+        job.setPartitionerClass(TupleGroupPartitioner.class);
 
-		job.setInputFormatClass(TextInputFormat.class);
-		job.setOutputFormatClass(TextOutputFormat.class);
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
 
-		FileInputFormat.addInputPath(job, new Path(Constants.bucket
-				+ Constants.reducer1OutputDirAWS));
+        FileInputFormat.addInputPath(job, new Path(Constants.bucket
+                + Constants.reducer1OutputDirAWS));
 
-		FileInputFormat.addInputPath(job, new Path(Constants.bucket
-				+ Constants.reducer2OutputDirAWS));
+        FileInputFormat.addInputPath(job, new Path(Constants.bucket
+                + Constants.reducer2OutputDirAWS));
 
-		FileOutputFormat.setOutputPath(job, new Path(Constants.bucket
-				+ Constants.reducer3OutputDirAWS));
+        FileOutputFormat.setOutputPath(job, new Path(Constants.bucket
+                + Constants.reducer3OutputDirAWS));
 
-		job.waitForCompletion(true);
-	}
+        job.waitForCompletion(true);
+    }
 }

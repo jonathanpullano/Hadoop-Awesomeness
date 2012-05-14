@@ -14,34 +14,34 @@ import constants.Constants;
 
 public class Step4 {
 
-	public void run(final String inputPath) throws Exception {
-		final Configuration conf = new Configuration();
+    public void run(final String inputPath) throws Exception {
+        final Configuration conf = new Configuration();
 
-		final Job job = new Job(conf, "Step4");
-		job.setJarByClass(Step4.class);
+        final Job job = new Job(conf, "Step4");
+        job.setJarByClass(Step4.class);
 
-		job.setOutputKeyClass(IntWritable.class);
-		job.setOutputValueClass(IntWritable.class);
+        job.setOutputKeyClass(IntWritable.class);
+        job.setOutputValueClass(IntWritable.class);
 
-		job.setMapperClass(Map4.class);
-		job.setReducerClass(Reducer4.class);
+        job.setMapperClass(Map4.class);
+        job.setReducerClass(Reducer4.class);
 
-		// job.setPartitionerClass(GroupPartitioner.class);
+        // job.setPartitionerClass(GroupPartitioner.class);
 
-		job.setInputFormatClass(TextInputFormat.class);
-		job.setOutputFormatClass(TextOutputFormat.class);
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
 
-		FileInputFormat.addInputPath(job, new Path(inputPath));
+        FileInputFormat.addInputPath(job, new Path(inputPath));
 
-		Util.deleteDir(Constants.reducer4OutputDir);
-		FileOutputFormat.setOutputPath(job, new Path(
-				Constants.reducer4OutputDir));
+        Util.deleteDir(Constants.reducer4OutputDir);
+        FileOutputFormat.setOutputPath(job, new Path(
+                Constants.reducer4OutputDir));
 
-		job.waitForCompletion(true);
-	}
+        job.waitForCompletion(true);
+    }
 
-	public static void main(final String[] args) throws Exception {
-		final Step4 step = new Step4();
-		step.run(Constants.reducer3OutputDir);
-	}
+    public static void main(final String[] args) throws Exception {
+        final Step4 step = new Step4();
+        step.run(Constants.reducer3OutputDir);
+    }
 }

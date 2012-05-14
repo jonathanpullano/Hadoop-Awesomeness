@@ -14,43 +14,41 @@ import test.Util;
 import constants.Constants;
 
 public class Step3 {
-	boolean setReducer = true;
+    boolean setReducer = true;
 
-	public void disableReducer() {
-		setReducer = false;
-	}
+    public void disableReducer() {
+        setReducer = false;
+    }
 
-	public void run() throws Exception {
-		final Configuration conf = new Configuration();
-		final Job job = new Job(conf, "Step3");
+    public void run() throws Exception {
+        final Configuration conf = new Configuration();
+        final Job job = new Job(conf, "Step3");
 
-		job.setJarByClass(Step3.class);
+        job.setJarByClass(Step3.class);
 
-		job.setOutputKeyClass(IntWritable.class);
-		job.setOutputValueClass(Tuple.class);
+        job.setOutputKeyClass(IntWritable.class);
+        job.setOutputValueClass(Tuple.class);
 
-		job.setMapperClass(Map3.class);
-		if (setReducer) {
-			job.setReducerClass(Reducer3.class);
-		}
+        job.setMapperClass(Map3.class);
+        if (setReducer)
+            job.setReducerClass(Reducer3.class);
 
-		job.setPartitionerClass(TupleGroupPartitioner.class);
+        job.setPartitionerClass(TupleGroupPartitioner.class);
 
-		job.setInputFormatClass(TextInputFormat.class);
-		job.setOutputFormatClass(TextOutputFormat.class);
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
 
-		FileInputFormat
-				.addInputPath(job, new Path(Constants.reducer2OutputDir));
-		for (final String filename : Util
-				.getReducerOutputs(Constants.reducer1OutputDir)) {
-			FileInputFormat.addInputPath(job, new Path(
-					Constants.reducer1OutputDir + "/" + filename));
-		}
+        FileInputFormat
+                .addInputPath(job, new Path(Constants.reducer2OutputDir));
+        for (final String filename : Util
+                .getReducerOutputs(Constants.reducer1OutputDir))
+            FileInputFormat.addInputPath(job, new Path(
+                    Constants.reducer1OutputDir + "/" + filename));
 
-		Util.deleteDir(Constants.reducer3OutputDir);
-		FileOutputFormat.setOutputPath(job, new Path(
-				Constants.reducer3OutputDir));
+        Util.deleteDir(Constants.reducer3OutputDir);
+        FileOutputFormat.setOutputPath(job, new Path(
+                Constants.reducer3OutputDir));
 
-		job.waitForCompletion(true);
-	}
+        job.waitForCompletion(true);
+    }
 }

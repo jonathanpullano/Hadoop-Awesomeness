@@ -1,8 +1,13 @@
-total edges	18.0
-total nodes	21.0
-total components	3.0
-max component size	11.0
-min component size	3.0
-raw average	7.0
-weighted average	8.523809
-burn count	4.972222
+N = 	36
+M = 	6
+g = 	2
+Density = 	0.59
+From NetId = 	0.388
+Edges = 	18
+Vertices = 	21
+Components = 	3
+Max CC size = 	11
+Min CC size = 	3
+Avg CC size = 	7.0
+Weighted avg CC size = 	8.523809
+Avg burn count = 	4.972222

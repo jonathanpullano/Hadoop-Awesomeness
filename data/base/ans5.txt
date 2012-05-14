@@ -1,0 +1,13 @@
+N = 	1600
+M = 	40
+g = 	2
+Density = 	0.59
+From NetId = 	0.388
+Edges = 	798
+Vertices = 	800
+Components = 	21
+Max CC size = 	78
+Min CC size = 	1
+Avg CC size = 	38.095238
+Weighted avg CC size = 	53.2975
+Avg burn count = 	26.64875

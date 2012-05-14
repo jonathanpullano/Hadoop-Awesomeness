@@ -16,7 +16,7 @@ public class StepOneTest {
         Constants.M = (int) Math.sqrt(Constants.N);
         Constants.g = 3;
         Constants.numGroups = Constants.M / Constants.g;
-        Constants.groupSize = Constants.M * (Constants.g+1);
+        Constants.groupSize = Constants.M * (Constants.g + 1);
         Constants.wLimit = 1.25f;
         Constants.wMin = .75f;
         Constants.COMPUTE_DIAGONAL = false;

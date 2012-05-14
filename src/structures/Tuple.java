@@ -10,8 +10,7 @@ public class Tuple implements WritableComparable<Tuple> {
     private int first;
     private int second;
 
-    public Tuple() {
-    };
+    public Tuple() {};
 
     public Tuple(final int first, final int second) {
         this.first = first;
@@ -44,9 +43,11 @@ public class Tuple implements WritableComparable<Tuple> {
      * Sort on P, then on Q
      */
     public int compareTo(final Tuple that) {
-        if (this == that) return 0;
+        if (this == that)
+            return 0;
         final int pDiff = first - that.first;
-        if (pDiff == 0) return second - that.second;
+        if (pDiff == 0)
+            return second - that.second;
         return pDiff;
     }
 

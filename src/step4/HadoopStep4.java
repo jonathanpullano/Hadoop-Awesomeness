@@ -13,29 +13,29 @@ import constants.Constants;
 
 public class HadoopStep4 {
 
-	public void run() throws Exception {
-		final Configuration conf = new Configuration();
+    public void run() throws Exception {
+        final Configuration conf = new Configuration();
 
-		final Job job = new Job(conf, "HadoopStep4");
-		job.setJarByClass(HadoopStep4.class);
+        final Job job = new Job(conf, "HadoopStep4");
+        job.setJarByClass(HadoopStep4.class);
 
-		job.setOutputKeyClass(IntWritable.class);
-		job.setOutputValueClass(IntWritable.class);
+        job.setOutputKeyClass(IntWritable.class);
+        job.setOutputValueClass(IntWritable.class);
 
-		job.setMapperClass(Map4.class);
-		job.setReducerClass(Reducer4.class);
+        job.setMapperClass(Map4.class);
+        job.setReducerClass(Reducer4.class);
 
-		// job.setPartitionerClass(GroupPartitioner.class);
+        // job.setPartitionerClass(GroupPartitioner.class);
 
-		job.setInputFormatClass(TextInputFormat.class);
-		job.setOutputFormatClass(TextOutputFormat.class);
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
 
-		FileInputFormat.addInputPath(job, new Path(Constants.bucket
-				+ Constants.reducer3OutputDirAWS));
+        FileInputFormat.addInputPath(job, new Path(Constants.bucket
+                + Constants.reducer3OutputDirAWS));
 
-		FileOutputFormat.setOutputPath(job, new Path(Constants.bucket
-				+ Constants.reducer4OutputDirAWS));
+        FileOutputFormat.setOutputPath(job, new Path(Constants.bucket
+                + Constants.reducer4OutputDirAWS));
 
-		job.waitForCompletion(true);
-	}
+        job.waitForCompletion(true);
+    }
 }

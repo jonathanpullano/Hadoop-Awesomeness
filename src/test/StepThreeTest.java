@@ -21,8 +21,8 @@ public class StepThreeTest {
         Constants.wMin = .75f;
         Constants.COMPUTE_DIAGONAL = false;
     }
-    
-    //@Test
+
+    // @Test
     public void testHalfMonty() throws Exception {
         Constants.reducer1OutputDir = "data/step3/input1";
         Constants.reducer2OutputDir = "data/step3/input2";

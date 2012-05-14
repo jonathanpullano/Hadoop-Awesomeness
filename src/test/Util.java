@@ -32,7 +32,8 @@ public class Util {
             final String[] children = dir.list();
             for (final String element : children) {
                 final boolean success = deleteDir(new File(dir, element));
-                if (!success) return false;
+                if (!success)
+                    return false;
             }
         }
         // The directory is now empty so delete it
@@ -41,7 +42,8 @@ public class Util {
 
     public static boolean copyFile(final File fromFile, final File toFile)
             throws IOException {
-        if (!toFile.exists()) toFile.createNewFile();
+        if (!toFile.exists())
+            toFile.createNewFile();
         InputStream in = null;
         OutputStream out = null;
 
@@ -55,8 +57,10 @@ public class Util {
             while ((len = in.read(buf)) > 0)
                 out.write(buf, 0, len);
         } finally {
-            if (in != null) in.close();
-            if (out != null) out.close();
+            if (in != null)
+                in.close();
+            if (out != null)
+                out.close();
         }
         return true;
     }
@@ -78,27 +82,31 @@ public class Util {
         }
         return plaintext.toString();
     }
-    
-    public static ArrayList<String> getReducerOutputs(final String reducerDirectory, final String prefix) {
-        File dir = new File(reducerDirectory);
+
+    public static ArrayList<String> getReducerOutputs(
+            final String reducerDirectory, final String prefix) {
+        final File dir = new File(reducerDirectory);
         if (dir.isDirectory()) {
-            ArrayList<String> children = new ArrayList<String>(Arrays.asList(dir.list()));
-            //Pattern pattern = Pattern.compile("part-r-[0-9]*");
-            
-            Iterator<String> iter = children.iterator();
-            while(iter.hasNext()) {
-                String tmp = iter.next();
-                
-                if(!tmp.startsWith(prefix))
+            final ArrayList<String> children = new ArrayList<String>(
+                    Arrays.asList(dir.list()));
+            // Pattern pattern = Pattern.compile("part-r-[0-9]*");
+
+            final Iterator<String> iter = children.iterator();
+            while (iter.hasNext()) {
+                final String tmp = iter.next();
+
+                if (!tmp.startsWith(prefix))
                     iter.remove();
             }
-            
+
             System.out.println(children);
             return children;
-        } else throw new RuntimeException("Not a reducer dir");
+        } else
+            throw new RuntimeException("Not a reducer dir");
     }
-    
-    public static ArrayList<String> getReducerOutputs(final String reducerDirectory) {
+
+    public static ArrayList<String> getReducerOutputs(
+            final String reducerDirectory) {
         return getReducerOutputs(reducerDirectory, "part-r-");
     }
 }

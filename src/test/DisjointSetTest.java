@@ -50,7 +50,7 @@ public class DisjointSetTest {
         assertTrue(set.find(7) == 7);
         assertTrue(set.find(8) == 7);
     }
-    
+
     @Test
     public void testFind2() {
         final DisjointSet set = new DisjointSet(9);
