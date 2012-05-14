@@ -1,7 +1,4 @@
 bin/*
-lib/*
-.classpath
-.classpath*
 *.orig
 data/output
 .gitignore~
