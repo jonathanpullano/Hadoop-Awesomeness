@@ -64,7 +64,7 @@ public class Reducer3 extends
                 set.union(p, p - 1);
 
             if (Constants.COMPUTE_DIAGONAL) {
-                // Compute lower left diagonal
+                // Compute lower right diagonal
                 if ((p > height) && (p % height != 1)
                         && pointMemory.contains(p - height - 1))
                     set.union(p, p - height - 1);
