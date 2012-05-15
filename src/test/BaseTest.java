@@ -53,10 +53,6 @@ public class BaseTest {
     }
 
     @Test
-    /**
-     * Answers provided by ben are wrong, the correct component size is 20 and its a typo in his
-     * notes.
-     */
     public void testNorthEastCorner() throws Exception {
         Constants.N = 1600;
         Constants.g = 2;
